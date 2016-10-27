@@ -1,0 +1,8 @@
+
+#Ignore files build by Visual Studio
+bin
+obj
+*.suo
+packages/
+TestResults/
+*.user
