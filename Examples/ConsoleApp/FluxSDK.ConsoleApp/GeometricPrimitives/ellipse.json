@@ -1,0 +1,10 @@
+{
+                        "origin": [
+                            0.5,
+                            1.2,
+                            -8.2
+                        ],
+                        "majorRadius": 15.8,
+                        "minorRadius": 12.1,
+                        "primitive": "ellipse"
+                    }

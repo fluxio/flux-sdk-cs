@@ -1,0 +1,1610 @@
+<?xml version="1.0"?>
+<doc>
+  <assembly>
+    <name>Flux.SDK</name>
+  </assembly>
+  <members>
+    <member name="T:Flux.SDK.DataTableAPI.CellEvent">
+      <summary> Represents information about the cell event</summary>
+      <remarks> Relevant to services which support the METADATA capability</remarks>
+    </member>
+    <member name="M:Flux.SDK.DataTableAPI.CellEvent.GetDate">
+      <summary>
+            Converts Java timestamp to DateTime
+            </summary>
+      <returns>Returns time as DateTime structure</returns>
+    </member>
+    <member name="P:Flux.SDK.DataTableAPI.CellEvent.ClientId">
+      <summary> The client id</summary>
+    </member>
+    <member name="P:Flux.SDK.DataTableAPI.CellEvent.ClientInfo">
+      <summary> The client information</summary>
+    </member>
+    <member name="P:Flux.SDK.DataTableAPI.CellEvent.Time">
+      <summary> The time when event occured</summary>
+    </member>
+    <member name="P:Flux.SDK.DataTableAPI.CellEvent.Size">
+      <summary>size of the value stored in this cell</summary>
+    </member>
+    <member name="P:Flux.SDK.DataTableAPI.CellEvent.Type">
+      <summary> The size of the value stored in this cell</summary>
+    </member>
+    <member name="T:Flux.SDK.DataTableAPI.ClientMetadata">
+      <summary>Represents client metadata of the cell</summary>
+    </member>
+    <member name="P:Flux.SDK.DataTableAPI.ClientMetadata.Label">
+      <summary>The cell label</summary>
+    </member>
+    <member name="P:Flux.SDK.DataTableAPI.ClientMetadata.Description">
+      <summary>The cell description</summary>
+    </member>
+    <member name="P:Flux.SDK.DataTableAPI.ClientMetadata.Locked">
+      <summary>If set to true then the cell will be readonly</summary>
+    </member>
+    <member name="T:Flux.SDK.DataTableAPI.DatatableTypes.CellValue">
+      <summary>Represents the cell value</summary>
+    </member>
+    <member name="M:Flux.SDK.DataTableAPI.DatatableTypes.CellValue.Dispose">
+      <summary>Disposes CellValue instance</summary>
+    </member>
+    <member name="M:Flux.SDK.DataTableAPI.DatatableTypes.CellValue.AsString">
+      <summary>Converts Stream value of the cell to string</summary>
+      <returns>The cell value as string</returns>
+      <exception cref="T:Flux.SDK.Exceptions.InternalSDKException">Throw InternalSDKException if data can't be read.</exception>
+    </member>
+    <member name="M:Flux.SDK.DataTableAPI.DatatableTypes.CellValue.AsInt32">
+      <summary>Converts Stream value of the cell to Int32</summary>
+      <returns>The cell value as Int32</returns>
+      <exception cref="T:Flux.SDK.Exceptions.InternalSDKException">Throw InternalSDKException if data can't be read.</exception>
+    </member>
+    <member name="M:Flux.SDK.DataTableAPI.DatatableTypes.CellValue.AsInt64">
+      <summary>Converts Stream value of the cell to Int64</summary>
+      <returns>The cell value as Int32</returns>
+      <exception cref="T:Flux.SDK.Exceptions.InternalSDKException">Throw InternalSDKException if data can't be read.</exception>
+    </member>
+    <member name="P:Flux.SDK.DataTableAPI.DatatableTypes.CellValue.Stream">
+      <summary>Stream value of the cell</summary>
+    </member>
+    <member name="P:Flux.SDK.DataTableAPI.DatatableTypes.CellValue.StreamLength">
+      <summary>Length of the Stream cell value</summary>
+    </member>
+    <member name="T:Flux.SDK.DataTableAPI.DatatableTypes.CellReleaseRefResult">
+      <summary>Contains dereferenced permanent cell reference to value</summary>
+    </member>
+    <member name="P:Flux.SDK.DataTableAPI.DatatableTypes.CellReleaseRefResult.Value">
+      <summary>The cell value</summary>
+    </member>
+    <member name="P:Flux.SDK.DataTableAPI.DatatableTypes.CellReleaseRefResult.ValueMetadata">
+      <summary>The cell value metadata</summary>
+    </member>
+    <member name="P:Flux.SDK.DataTableAPI.DatatableTypes.CellReleaseRefResult.Metadata">
+      <summary>The cell metadata</summary>
+    </member>
+    <member name="P:Flux.SDK.DataTableAPI.DatatableTypes.CellReleaseRefResult.ClientMetadata">
+      <summary>The cell client metadata</summary>
+    </member>
+    <member name="T:Flux.SDK.DataTableAPI.DatatableTypes.Cell">
+      <summary>Represents a single cell</summary>
+    </member>
+    <member name="P:Flux.SDK.DataTableAPI.DatatableTypes.Cell.Info">
+      <summary>The cell information</summary>
+    </member>
+    <member name="P:Flux.SDK.DataTableAPI.DatatableTypes.Cell.Value">
+      <summary>The cell value</summary>
+    </member>
+    <member name="T:Flux.SDK.DataTableAPI.DatatableTypes.CellRefResult">
+      <summary>Structure contains cell reference.</summary>
+    </member>
+    <member name="P:Flux.SDK.DataTableAPI.DatatableTypes.CellRefResult.Info">
+      <summary>Information about the cell</summary>
+    </member>
+    <member name="P:Flux.SDK.DataTableAPI.DatatableTypes.CellRefResult.ValueReference">
+      <summary>The cell value reference</summary>
+    </member>
+    <member name="T:Flux.SDK.DataTableAPI.DatatableTypes.ProgressReporter">
+      <summary>Report progress to the specified UpperLimit.</summary>
+    </member>
+    <member name="F:Flux.SDK.DataTableAPI.DatatableTypes.ProgressReporter.OnProgressChanged">
+      <summary>Reports progress change.</summary>
+    </member>
+    <member name="M:Flux.SDK.DataTableAPI.DatatableTypes.ProgressReporter.#ctor(System.Int32)">
+      <summary>Initializes new ProgressReporter instance</summary>
+      <param name="upperLimit">The max value of the Progress.</param>
+    </member>
+    <member name="M:Flux.SDK.DataTableAPI.DatatableTypes.ProgressReporter.Finalize">
+      <summary>Finalizes Progress reporter. Reports max progress value (100).</summary>
+    </member>
+    <member name="M:Flux.SDK.DataTableAPI.DatatableTypes.ProgressReporter.Report(System.Int32)">
+      <summary>Reports a progress update.</summary>
+      <param name="value">The value of the updated progress.</param>
+    </member>
+    <member name="M:Flux.SDK.DataTableAPI.DatatableTypes.ProgressReporter.Report(System.Int64,System.Int64)">
+      <summary>Reports a progress update.</summary>
+      <param name="position">The current position in the progress stream</param>
+      <param name="length">The length of the progress stream</param>
+    </member>
+    <member name="P:Flux.SDK.DataTableAPI.DatatableTypes.ProgressReporter.UpperLimit">
+      <summary>The max value of the Progress.</summary>
+    </member>
+    <member name="T:Flux.SDK.DataTableAPI.DatatableTypes.ProgressStream">
+      <summary>Provides a wrapper for System.IO.Stream which reports reading/writing progress.</summary>
+    </member>
+    <member name="M:Flux.SDK.DataTableAPI.DatatableTypes.ProgressStream.#ctor(System.IO.Stream,System.Int64)">
+      <summary>Initializes a new instance of the Progress Stream with specified sourse stream and length.</summary>
+      <param name="sourceStream">Stream to report progress for.</param>
+      <param name="length">Stream full length.</param>
+    </member>
+    <member name="M:Flux.SDK.DataTableAPI.DatatableTypes.ProgressStream.#ctor(System.IO.Stream)">
+      <summary>Initializes a new instance of the Progress Stream with specified sourse stream and length.</summary>
+      <param name="sourceStream">Stream to report progress for.</param>
+    </member>
+    <member name="M:Flux.SDK.DataTableAPI.DatatableTypes.ProgressStream.Flush">
+      <summary>Clears buffers for this stream and causes any buffered data to be written.</summary>
+    </member>
+    <member name="M:Flux.SDK.DataTableAPI.DatatableTypes.ProgressStream.Read(System.Byte[],System.Int32,System.Int32)">
+      <summary>Reads a block of bytes from the stream and writes the data in a given buffer with reporting reading progress.</summary>
+      <param name="buffer">When this method returns, contains the specified byte array with the values between offset and (offset + count - 1) replaced by the bytes read from the current source.</param>
+      <param name="offset">The byte offset in array at which the read bytes will be placed.</param>
+      <param name="count">The maximum number of bytes to read.</param>
+      <returns>The maximum number of bytes to read.</returns>
+      <exception cref="T:System.ArgumentException"> The sum of offset and count is larger than the buffer length.</exception>
+      <exception cref="T:System.ArgumentNullException">Buffer is null.</exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">Offset or count is negative.</exception>
+      <exception cref="T:System.IO.IOException">An I/O error occurs.</exception>
+      <exception cref="T:System.NotSupportedException">The stream does not support reading.</exception>
+      <exception cref="T:System.ObjectDisposedException">Methods were called after the stream was closed.</exception>
+    </member>
+    <member name="M:Flux.SDK.DataTableAPI.DatatableTypes.ProgressStream.Seek(System.Int64,System.IO.SeekOrigin)">
+      <summary>Sets the position within the current stream.</summary>
+      <param name="offset">A byte offset relative to the origin parameter.</param>
+      <param name="origin">A value of type System.IO.SeekOrigin indicating the reference point used to obtain the new position.</param>
+      <returns>The new position within the current stream.</returns>
+      <exception cref="T:System.IO.IOException">An I/O error occurs.</exception>
+      <exception cref="T:System.NotSupportedException">The stream does not support seeking.</exception>
+      <exception cref="T:System.ObjectDisposedException">Methods were called after the stream was closed.</exception>
+    </member>
+    <member name="M:Flux.SDK.DataTableAPI.DatatableTypes.ProgressStream.SetLength(System.Int64)">
+      <summary>Sets the length of the current stream.</summary>
+      <param name="value">The desired length of the current stream in bytes.</param>
+      <exception cref="T:System.IO.IOException">An I/O error occurs.</exception>
+      <exception cref="T:System.NotSupportedException">The stream does not support both writing and seeking.</exception>
+      <exception cref="T:System.ObjectDisposedException">Methods were called after the stream was closed.</exception>
+    </member>
+    <member name="M:Flux.SDK.DataTableAPI.DatatableTypes.ProgressStream.Close">
+      <summary>Closes the current stream and releases any resources (such as sockets and file handles) associated with the current stream</summary>
+    </member>
+    <member name="M:Flux.SDK.DataTableAPI.DatatableTypes.ProgressStream.Write(System.Byte[],System.Int32,System.Int32)">
+      <summary>Writes a sequence of bytes to the current stream and advances the current position within this stream by the number of bytes written and reports writing progress.</summary>
+      <param name="buffer">An array of bytes. This method copies count bytes from buffer to the current stream.</param>
+      <param name="offset">The zero-based byte offset in buffer at which to begin copying bytes to the current stream.</param>
+      <param name="count">The number of bytes to be written to the current stream.</param>
+      <exception cref="T:System.ArgumentException"> The sum of offset and count is larger than the buffer length.</exception>
+      <exception cref="T:System.ArgumentNullException">Buffer is null.</exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">Offset or count is negative.</exception>
+      <exception cref="T:System.IO.IOException">An I/O error occurs.</exception>
+      <exception cref="T:System.NotSupportedException">The stream does not support writing.</exception>
+      <exception cref="T:System.ObjectDisposedException">Methods were called after the stream was closed.</exception>
+    </member>
+    <member name="M:Flux.SDK.DataTableAPI.DatatableTypes.ProgressStream.ReadAsync(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)">
+      <summary>Asynchronously reads a sequence of bytes from the current stream, advances the position within the stream by the number of bytes read, and monitors cancellation requests with reporting reading progress.</summary>
+      <param name="buffer">The buffer to write the data into.</param>
+      <param name="offset">The byte offset in buffer at which to begin writing data from the stream.</param>
+      <param name="count">The maximum number of bytes to read.</param>
+      <param name="cancellationToken">The token to monitor for cancellation requests. The default value is System.Threading.CancellationToken.None.</param>
+      <returns>A task that represents the asynchronous read operation. The value of the TResult parameter contains the total number of bytes read into the buffer. The result value can be less than the number of bytes requested if the number of bytes currently available is less than the requested number, or it can be 0 (zero) if the end of the stream has been reached.</returns>
+      <exception cref="T:System.ArgumentException"> The sum of offset and count is larger than the buffer length.</exception>
+      <exception cref="T:System.ArgumentNullException">Buffer is null.</exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">Offset or count is negative.</exception>
+      <exception cref="T:System.IO.IOException">An I/O error occurs.</exception>
+      <exception cref="T:System.NotSupportedException">The stream does not support reading.</exception>
+      <exception cref="T:System.ObjectDisposedException">Methods were called after the stream was closed.</exception>
+      <exception cref="T:System.InvalidOperationException">The stream is currently in use by a previous read operation.</exception>
+    </member>
+    <member name="M:Flux.SDK.DataTableAPI.DatatableTypes.ProgressStream.WriteAsync(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)">
+      <summary>Asynchronously writes a sequence of bytes to the current stream, advances the current position within this stream by the number of bytes written, and monitors cancellation requests with reporting writing progress.</summary>
+      <param name="buffer">The buffer to write data from.</param>
+      <param name="offset">The zero-based byte offset in buffer from which to begin copying bytes to the stream.</param>
+      <param name="count">The maximum number of bytes to write.</param>
+      <param name="cancellationToken">The token to monitor for cancellation requests. The default value is System.Threading.CancellationToken.None.</param>
+      <returns>A task that represents the asynchronous write operation.</returns>
+      <exception cref="T:System.ArgumentException"> The sum of offset and count is larger than the buffer length.</exception>
+      <exception cref="T:System.ArgumentNullException">Buffer is null.</exception>
+      <exception cref="T:System.ArgumentOutOfRangeException">Offset or count is negative.</exception>
+      <exception cref="T:System.IO.IOException">An I/O error occurs.</exception>
+      <exception cref="T:System.NotSupportedException">The stream does not support writing.</exception>
+      <exception cref="T:System.ObjectDisposedException">Methods were called after the stream was closed.</exception>
+      <exception cref="T:System.InvalidOperationException">The stream is currently in use by a previous write operation.</exception>
+    </member>
+    <member name="M:Flux.SDK.DataTableAPI.DatatableTypes.ProgressStream.FlushAsync(System.Threading.CancellationToken)">
+      <summary>Asynchronously clears all buffers for this stream, causes any buffered data to be written to source stream, and monitors cancellation requests.</summary>
+      <param name="cancellationToken">he token to monitor for cancellation requests. The default value is System.Threading.CancellationToken.None.</param>
+      <returns>A task that represents the asynchronous flush operation.</returns>
+      <exception cref="T:System.ObjectDisposedException">The stream has been disposed.</exception>
+    </member>
+    <member name="M:Flux.SDK.DataTableAPI.DatatableTypes.ProgressStream.ReportMaxValue">
+      <summary>Raizes OnProgressChanged event with current position and length.</summary>
+    </member>
+    <member name="P:Flux.SDK.DataTableAPI.DatatableTypes.ProgressStream.CanRead">
+      <summary>Gets a value indicating whether the current stream supports reading.</summary>
+      <returns>true if the stream supports reading; false if the stream is closed or stream is write-only.</returns>
+    </member>
+    <member name="P:Flux.SDK.DataTableAPI.DatatableTypes.ProgressStream.CanSeek">
+      <summary>Gets a value indicating whether the current stream supports seeking.</summary>
+      <returns>true if the stream supports seeking; false if the stream is closed or doesn't support seeking</returns>
+    </member>
+    <member name="P:Flux.SDK.DataTableAPI.DatatableTypes.ProgressStream.CanWrite">
+      <summary>Gets a value indicating whether the current stream supports writing.</summary>
+      <returns>true if the stream supports writing; false if the stream is closed or stream is read-only.</returns>
+    </member>
+    <member name="P:Flux.SDK.DataTableAPI.DatatableTypes.ProgressStream.Length">
+      <summary>Gets the length in bytes of the stream.</summary>
+      <returns>A long value representing the length of the stream in bytes.</returns>
+    </member>
+    <member name="P:Flux.SDK.DataTableAPI.DatatableTypes.ProgressStream.Position">
+      <summary>Gets or sets the current position of this stream.</summary>
+      <returns>The current position of this stream.</returns>
+    </member>
+    <member name="E:Flux.SDK.DataTableAPI.DatatableTypes.ProgressStream.OnProgressChanged">
+      <summary>Reports progress when read/write operation on strem performed. Returns number of read/write bytes and stream length.</summary>
+    </member>
+    <member name="T:Flux.SDK.DataTableAPI.DatatableTypes.ProgressEventHandler">
+      <summary>Represents the method that will handle the ProgressChanged event.</summary>
+      <param name="sender">The source of the event.</param>
+      <param name="e">ProgressEventArgs that contains progress data.</param>
+    </member>
+    <member name="T:Flux.SDK.DataTableAPI.DatatableTypes.ProgressEventArgs">
+      <summary>Represents the class that contain read/write progress data.</summary>
+    </member>
+    <member name="M:Flux.SDK.DataTableAPI.DatatableTypes.ProgressEventArgs.#ctor(System.Int64,System.Int64)">
+      <summary>Creates instance of ProgressEventArgs with specified position and length.</summary>
+      <param name="position">Current position in steam.</param>
+      <param name="length">Stream length</param>
+    </member>
+    <member name="P:Flux.SDK.DataTableAPI.DatatableTypes.ProgressEventArgs.Position">
+      <summary>Returns current position in steam.</summary>
+    </member>
+    <member name="P:Flux.SDK.DataTableAPI.DatatableTypes.ProgressEventArgs.Length">
+      <summary>Returns stream length.</summary>
+    </member>
+    <member name="T:Flux.SDK.DataTableAPI.NotificationEventHandler">
+      <summary>Represents the method that will handle the OnNotification event.</summary>
+      <param name="sender">The source of the event.</param>
+      <param name="e">NotificationEventArgs that contains notification data.</param>
+    </member>
+    <member name="T:Flux.SDK.DataTableAPI.ErrorEventHandler">
+      <summary>Represents the method that will handle the OnError event.</summary>
+      <param name="sender">The source of the event.</param>
+      <param name="e">ErrorEventArgs that contains error data.</param>
+    </member>
+    <member name="T:Flux.SDK.DataTableAPI.Notification">
+      <summary>Contains the cell notification data</summary>
+    </member>
+    <member name="P:Flux.SDK.DataTableAPI.Notification.CellInfo">
+      <summary>The cell information</summary>
+    </member>
+    <member name="P:Flux.SDK.DataTableAPI.Notification.CellEvent">
+      <summary>The cell event</summary>
+    </member>
+    <member name="T:Flux.SDK.DataTableAPI.Error">
+      <summary>Represents error occured on datatable</summary>
+    </member>
+    <member name="M:Flux.SDK.DataTableAPI.Error.#ctor(System.String)">
+      <summary>Initializes new Error instance</summary>
+      <param name="message">The error message</param>
+    </member>
+    <member name="P:Flux.SDK.DataTableAPI.Error.Message">
+      <summary>The error message</summary>
+    </member>
+    <member name="T:Flux.SDK.DataTableAPI.NotificationEventArgs">
+      <summary>Represents the class that contain data for the Notification received event</summary>
+    </member>
+    <member name="M:Flux.SDK.DataTableAPI.NotificationEventArgs.#ctor(Flux.SDK.DataTableAPI.Notification,System.String)">
+      <summary>Initializes new NotificationEventArgs instance</summary>
+      <param name="notification">The type of notification</param>
+      <param name="projectId">The project id</param>
+    </member>
+    <member name="P:Flux.SDK.DataTableAPI.NotificationEventArgs.Notification">
+      <summary>The type of notification</summary>
+    </member>
+    <member name="P:Flux.SDK.DataTableAPI.NotificationEventArgs.ProjectId">
+      <summary>The project id</summary>
+    </member>
+    <member name="T:Flux.SDK.DataTableAPI.ErrorEventArgs">
+      <summary>Represents the class that contain data for the  Error occured event</summary>
+    </member>
+    <member name="M:Flux.SDK.DataTableAPI.ErrorEventArgs.#ctor(Flux.SDK.DataTableAPI.Error,System.String)">
+      <summary>Initializes new ErrorEventArgs instance.</summary>
+      <param name="error">The occured Error.</param>
+      <param name="projectId">The project id.</param>
+    </member>
+    <member name="P:Flux.SDK.DataTableAPI.ErrorEventArgs.Error">
+      <summary>The occured Error.</summary>
+    </member>
+    <member name="P:Flux.SDK.DataTableAPI.ErrorEventArgs.ProjectId">
+      <summary>The project id.</summary>
+    </member>
+    <member name="T:Flux.SDK.Types.SupportedVersions">
+      <summary>Versions supported by Flux</summary>
+    </member>
+    <member name="F:Flux.SDK.Types.SupportedVersions.Min">
+      <summary>The minimal version supported by Flux</summary>
+    </member>
+    <member name="F:Flux.SDK.Types.SupportedVersions.Latest">
+      <summary>The latest version supported by Flux</summary>
+    </member>
+    <member name="T:Flux.SDK.Types.PluginVersions">
+      <summary>Represents set of plugins with versions supported by Flux.</summary>
+    </member>
+    <member name="F:Flux.SDK.Types.PluginVersions.Versions">
+      <summary>Set of supported plugins with versions.</summary>
+    </member>
+    <member name="T:Flux.SDK.FluxLinkSDKExtension">
+      <summary>
+            Provides links to common Flux urls.
+            </summary>
+    </member>
+    <member name="M:Flux.SDK.FluxLinkSDKExtension.GetDownloadUri(Flux.SDK.FluxSDK)">
+      <summary>
+            Returns link to Flux Download url.
+            </summary>
+      <param name="sdk">
+      </param>
+      <returns>Link to Flux Download url.</returns>
+    </member>
+    <member name="M:Flux.SDK.FluxLinkSDKExtension.GetRegisterUri(Flux.SDK.FluxSDK)">
+      <summary>
+            Returns link to Flux signup url.
+            </summary>
+      <param name="sdk">
+      </param>
+      <returns>Link to Flux signup url.</returns>
+    </member>
+    <member name="M:Flux.SDK.FluxLinkSDKExtension.GetReleaseNotesUri(Flux.SDK.FluxSDK)">
+      <summary>
+            Returns link to Flux Release notes password url.
+            </summary>
+      <param name="sdk">
+      </param>
+      <returns>Link to Flux Release notes.</returns>
+    </member>
+    <member name="M:Flux.SDK.FluxLinkSDKExtension.GetForgetUri(Flux.SDK.FluxSDK)">
+      <summary>
+            Returns link to Forget password url.
+            </summary>
+      <param name="sdk">
+      </param>
+      <returns>Link to Forget password url.</returns>
+    </member>
+    <member name="M:Flux.SDK.FluxLinkSDKExtension.GetHelpUri(Flux.SDK.FluxSDK)">
+      <summary>
+            Returns Flux help link.
+            </summary>
+      <param name="sdk">
+      </param>
+      <returns>Flux help link.</returns>
+    </member>
+    <member name="M:Flux.SDK.FluxLinkSDKExtension.GetMyProfileUri(Flux.SDK.FluxSDK)">
+      <summary>
+            Returns link to My Profile at Flux.
+            </summary>
+      <param name="sdk">
+      </param>
+      <returns>Link to My Profile at Flux.</returns>
+    </member>
+    <member name="T:Flux.SDK.Types.FluxCookie">
+      <summary>Represents the user cookies</summary>
+    </member>
+    <member name="M:Flux.SDK.Types.FluxCookie.#ctor">
+      <summary>
+            Initializes new FluxCookie instance
+            </summary>
+    </member>
+    <member name="M:Flux.SDK.Types.FluxCookie.#ctor(System.Net.Cookie)">
+      <summary>
+            Initializes new FluxCookie instance
+            </summary>
+      <param name="cookie">Cookie to initialize the cuurent instance from</param>
+    </member>
+    <member name="P:Flux.SDK.Types.FluxCookie.CookieName">
+      <summary>The name of the cookie</summary>
+    </member>
+    <member name="P:Flux.SDK.Types.FluxCookie.CookieDomain">
+      <summary>The domain of the cookie</summary>
+    </member>
+    <member name="P:Flux.SDK.Types.FluxCookie.CookieValue">
+      <summary>The value of the cookie</summary>
+    </member>
+    <member name="T:Flux.SDK.DataTableAPI.CellInfo">
+      <summary>Represents information about the cell</summary>
+    </member>
+    <member name="M:Flux.SDK.DataTableAPI.CellInfo.Equals(System.Object)">
+      <summary>Determines whether the specified CellInfo is equal to the current System.Object.</summary>
+      <param name="obj">The object to compare with the current object.</param>
+      <returns>True if the specified object is equal to the current object; otherwise, false.</returns>
+    </member>
+    <member name="M:Flux.SDK.DataTableAPI.CellInfo.Equals(Flux.SDK.DataTableAPI.CellInfo)">
+      <summary>Determines whether the specified CellInfo is equal to the current CellInfo.</summary>
+      <param name="cellInfo">The CellInfo to compare with the current object.</param>
+      <returns>True if the specified object is equal to the current object; otherwise, false.</returns>
+    </member>
+    <member name="M:Flux.SDK.DataTableAPI.CellInfo.GetHashCode">
+      <summary>Serves as a hash function for the CellInfo type.</summary>
+      <returns>A hash code for the current CellInfo.</returns>
+    </member>
+    <member name="M:Flux.SDK.DataTableAPI.CellInfo.op_Equality(Flux.SDK.DataTableAPI.CellInfo,Flux.SDK.DataTableAPI.CellInfo)">
+      <summary>Determines whether two specified CellInfo instances are equal.</summary>
+      <param name="a">The first CellInfo instance.</param>
+      <param name="b">The second CellInfo instance.</param>
+      <returns>True if the specified CellInfo instances are equal; otherwise, false.</returns>
+    </member>
+    <member name="M:Flux.SDK.DataTableAPI.CellInfo.op_Inequality(Flux.SDK.DataTableAPI.CellInfo,Flux.SDK.DataTableAPI.CellInfo)">
+      <summary>Determines whether two specified CellInfo instances are not equal.</summary>
+      <param name="a">The first CellInfo instance.</param>
+      <param name="b">The second CellInfo instance.</param>
+      <returns>True if the specified CellInfo instances are not equal; otherwise, false.</returns>
+    </member>
+    <member name="P:Flux.SDK.DataTableAPI.CellInfo.CellId">
+      <summary> Id of the cell.</summary>
+    </member>
+    <member name="P:Flux.SDK.DataTableAPI.CellInfo.Metadata">
+      <summary> Metadata of the cell</summary>
+      <remarks> Only if METADATA capability is supported.</remarks>
+    </member>
+    <member name="P:Flux.SDK.DataTableAPI.CellInfo.ClientMetadata">
+      <summary> Metadata of the client</summary>
+      <remarks> Only if CLIENT_METADATA capability is supported.</remarks>
+    </member>
+    <member name="T:Flux.SDK.Types.ClientInfo">
+      <summary>Contains information about the client.</summary>
+    </member>
+    <member name="M:Flux.SDK.Types.ClientInfo.#ctor(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String})">
+      <summary>
+            Initializes new ClientInfo instance
+            </summary>
+      <param name="clientId">The client id</param>
+      <param name="clientVersion">The client version</param>
+      <param name="additionalClientData">Additional client data</param>
+      <remarks>Relevant if METADATA capability is supported</remarks>
+    </member>
+    <member name="P:Flux.SDK.Types.ClientInfo.OS">
+      <summary>The current client OS</summary>
+    </member>
+    <member name="P:Flux.SDK.Types.ClientInfo.SDKName">
+      <summary>The SDK name</summary>
+    </member>
+    <member name="P:Flux.SDK.Types.ClientInfo.SDKVersion">
+      <summary>The SDK version</summary>
+    </member>
+    <member name="P:Flux.SDK.Types.ClientInfo.UserId">
+      <summary>The user id</summary>
+    </member>
+    <member name="P:Flux.SDK.Types.ClientInfo.UserName">
+      <summary>The user name</summary>
+    </member>
+    <member name="P:Flux.SDK.Types.ClientInfo.DeveloperId">
+      <summary>The developer id</summary>
+    </member>
+    <member name="P:Flux.SDK.Types.ClientInfo.DeveloperName">
+      <summary>The developer name</summary>
+    </member>
+    <member name="P:Flux.SDK.Types.ClientInfo.ClientId">
+      <summary>The client id</summary>
+    </member>
+    <member name="P:Flux.SDK.Types.ClientInfo.ClientName">
+      <summary>The client name</summary>
+    </member>
+    <member name="P:Flux.SDK.Types.ClientInfo.ClientVersion">
+      <summary>The client version</summary>
+    </member>
+    <member name="P:Flux.SDK.Types.ClientInfo.AdditionalClientData">
+      <summary>Additional client data</summary>
+      <remarks>HostProgramVersion and HostProgramMainFile are required, but may become optional in future</remarks>
+    </member>
+    <member name="T:Flux.SDK.DataTableAPI.DataTable">
+      <summary>Represents data and operations with cells</summary>
+    </member>
+    <member name="F:Flux.SDK.DataTableAPI.DataTable.OnWebSocketReconnected">
+      <summary>Occurs when WebSocket is reconnected.</summary>
+    </member>
+    <member name="M:Flux.SDK.DataTableAPI.DataTable.GetCell(System.String,System.Boolean,System.Boolean)">
+      <summary>Get cell value stream by id.</summary>
+      <param name="cellId">Id of the cell.</param>
+      <param name="extractCellMetadata">If set to true then metadata associated with this cell will be extracted.</param>
+      <param name="extractClientMetadata">If set to true then client metadata associated with this cell will be extracted.</param>
+      <returns>Stream of the cell value.</returns>
+      <exception cref="T:Flux.SDK.Exceptions.UnsupportedCapabilityException">Throws if Capability.CLIENT_METADATA is not supported.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.ConnectionFailureException">Throws if network connection is down.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.UnathorizedException">Throws if provided cookies were obsolete.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.ServerUnavailableException">Throws if Flux server is down.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.InternalSDKException">Throws for unhandled SDK exceptions.</exception>
+    </member>
+    <member name="M:Flux.SDK.DataTableAPI.DataTable.GetCellAsync(System.String,System.Boolean,System.Boolean)">
+      <summary>Get cell value stream by id (Asyncronous method)./// </summary>
+      <param name="cellId">Id of the cell.</param>
+      <param name="extractCellMetadata">If set to true then metadata associated with this cell will be extracted.</param>
+      <param name="extractClientMetadata">If set to true then client metadata associated with this cell will be extracted.</param>
+      <returns>Stream of the cell value.</returns>
+      <exception cref="T:Flux.SDK.Exceptions.UnsupportedCapabilityException">Throws if Capability.CLIENT_METADATA is not supported.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.ConnectionFailureException">Throws if network connection is down.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.UnathorizedException">Throws if provided cookies were obsolete.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.ServerUnavailableException">Throws if Flux server is down.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.InternalSDKException">Throws for unhandled SDK exceptions.</exception>
+    </member>
+    <member name="M:Flux.SDK.DataTableAPI.DataTable.GetCell(Flux.SDK.DataTableAPI.CellInfo,System.Boolean,System.Boolean)">
+      <summary>Get cell value by cells instance./// </summary>
+      <param name="cell">CellInfo</param>
+      <param name="extractCellMetadata">If set to true then metadata associated with this cell will be extracted.</param>
+      <param name="extractClientMetadata">If set to true then client metadata associated with this cell will be extracted.</param>
+      <returns>Stream of the cell value.</returns>
+      <exception cref="T:Flux.SDK.Exceptions.UnsupportedCapabilityException">Throws if Capability.CLIENT_METADATA is not supported.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.ConnectionFailureException">Throws if network connection is down.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.UnathorizedException">Throws if provided cookies were obsolete.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.ServerUnavailableException">Throws if Flux server is down.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.InternalSDKException">Throws for unhandled SDK exceptions.</exception>
+    </member>
+    <member name="M:Flux.SDK.DataTableAPI.DataTable.GetCellAsync(Flux.SDK.DataTableAPI.CellInfo,System.Boolean,System.Boolean)">
+      <summary>Get cell value by cells instance (Asyncronous method)./// </summary>
+      <param name="cell">CellInfo</param>
+      <param name="extractCellMetadata">If set to true then metadata associated with this cell will be extracted.</param>
+      <param name="extractClientMetadata">If set to true then client metadata associated with this cell will be extracted.</param>
+      <returns>Stream of the cell value.</returns>
+      <exception cref="T:Flux.SDK.Exceptions.UnsupportedCapabilityException">Throws if Capability.CLIENT_METADATA is not supported.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.ConnectionFailureException">Throws if network connection is down.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.UnathorizedException">Throws if provided cookies were obsolete.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.ServerUnavailableException">Throws if Flux server is down.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.InternalSDKException">Throws for unhandled SDK exceptions.</exception>
+    </member>
+    <member name="M:Flux.SDK.DataTableAPI.DataTable.SetCell(System.String,System.IO.Stream,Flux.SDK.DataTableAPI.ClientMetadata,System.Boolean)">
+      <summary>Updates cell value.</summary>
+      <param name="cellId">Id of the cell to be updated.</param>
+      <param name="valueStream">Value</param>
+      <param name="clientMetadata">ClientMetadata to associate with the cell.</param>
+      <param name="ignoreValue">If set to true then passed value is ignored.</param>
+      <returns>Cell info</returns>
+      <exception cref="T:Flux.SDK.Exceptions.UnsupportedCapabilityException">Throws if Capability.CLIENT_METADATA is not supported.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.ConnectionFailureException">Throws if network connection is down.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.UnathorizedException">Throws if provided cookies were obsolete.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.ForbiddenException">Throws if project/cell is readonly or deleted.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.ServerUnavailableException">Throws if Flux server is down.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.InternalSDKException">Throws for unhandled SDK exceptions.</exception>
+    </member>
+    <member name="M:Flux.SDK.DataTableAPI.DataTable.SetCell(Flux.SDK.DataTableAPI.CellInfo,System.String,Flux.SDK.DataTableAPI.ClientMetadata,System.Boolean)">
+      <summary>Updates cell value.</summary>
+      <param name="cell">CellInfo instance to be updated.</param>
+      <param name="json">Json value to be written to the cell.</param>
+      <param name="clientMetadata">ClientMetadata to associate with the cell.</param>
+      <param name="ignoreValue">If set to true then passed value is ignored.</param>
+      <returns>Cell info</returns>
+      <exception cref="T:Flux.SDK.Exceptions.UnsupportedCapabilityException">Throws if Capability.CLIENT_METADATA is not supported.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.ConnectionFailureException">Throws if network connection is down.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.UnathorizedException">Throws if provided cookies were obsolete.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.ForbiddenException">Throws if project/cell is readonly.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.ServerUnavailableException">Throws if Flux server is down.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.InternalSDKException">Throws for unhandled SDK exceptions.</exception>
+    </member>
+    <member name="M:Flux.SDK.DataTableAPI.DataTable.SetCellAsync(System.String,System.IO.Stream,Flux.SDK.DataTableAPI.ClientMetadata,System.Boolean)">
+      <summary>Updates cell value (Asynchronous method).</summary>
+      <param name="cellId">Id of the cell to be updated.</param>
+      <param name="valueStream">Stream of the value to be uploaded.</param>
+      <param name="clientMetadata">ClientMetadata to associate with the cell.</param>
+      <param name="ignoreValue">If set to true then passed value is ignored.</param>
+      <returns>Cell info</returns>
+      <exception cref="T:Flux.SDK.Exceptions.UnsupportedCapabilityException">Throws if Capability.CLIENT_METADATA is not supported.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.ConnectionFailureException">Throws if network connection is down.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.UnathorizedException">Throws if provided cookies were obsolete.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.ForbiddenException">Throws if project/cell is readonly.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.ServerUnavailableException">Throws if Flux server is down.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.InternalSDKException">Throws for unhandled SDK exceptions.</exception>
+    </member>
+    <member name="M:Flux.SDK.DataTableAPI.DataTable.SetCellAsync(Flux.SDK.DataTableAPI.CellInfo,System.String,Flux.SDK.DataTableAPI.ClientMetadata,System.Boolean)">
+      <summary>Updates cell value (Asynchronous method).</summary>
+      <param name="cell">CellInfo instance to be updated.</param>
+      <param name="json">Json value to be written to the cell.</param>
+      <param name="clientMetadata">ClientMetadata to associate with the cell.</param>
+      <param name="ignoreValue">If set to true then passed value is ignored.</param>
+      <returns>Cell info</returns>
+      <exception cref="T:Flux.SDK.Exceptions.UnsupportedCapabilityException">Throws if Capability.CLIENT_METADATA is not supported.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.ConnectionFailureException">Throws if network connection is down.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.UnathorizedException">Throws if provided cookies were obsolete.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.ForbiddenException">Throws if project/cell is readonly.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.ServerUnavailableException">Throws if Flux server is down.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.InternalSDKException">Throws for unhandled SDK exceptions.</exception>
+    </member>
+    <member name="M:Flux.SDK.DataTableAPI.DataTable.CreateCell(System.IO.Stream,Flux.SDK.DataTableAPI.ClientMetadata)">
+      <summary>Create new cell.</summary>
+      <param name="value">Value</param>
+      <param name="clientMetadata">ClientMetadata to associate with the cell.</param>
+      <returns>CellInfo of the newly created cell.</returns>
+      <exception cref="T:Flux.SDK.Exceptions.UnsupportedCapabilityException">Throws if Capability.CLIENT_METADATA is not supported.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.ConnectionFailureException">Throws if network connection is down.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.UnathorizedException">Throws if provided cookies were obsolete.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.ForbiddenException">Throws if this project is readonly.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.ServerUnavailableException">Throws if Flux server is down.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.InternalSDKException">Throws for unhandled SDK exceptions.</exception>
+    </member>
+    <member name="M:Flux.SDK.DataTableAPI.DataTable.CreateCell(System.String,Flux.SDK.DataTableAPI.ClientMetadata)">
+      <summary>Create new cell.</summary>
+      <param name="json">Json value to set to the cell.</param>
+      <param name="clientMetadata">ClientMetadata to associate with the cell.</param>
+      <returns>CellInfo of the newly created cell.</returns>
+      <exception cref="T:Flux.SDK.Exceptions.UnsupportedCapabilityException">Throws if Capability.CLIENT_METADATA is not supported.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.ConnectionFailureException">Throws if network connection is down.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.UnathorizedException">Throws if provided cookies were obsolete.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.ForbiddenException">Throws if this project is readonly.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.ServerUnavailableException">Throws if Flux server is down.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.InternalSDKException">Throws for unhandled SDK exceptions.</exception>
+    </member>
+    <member name="M:Flux.SDK.DataTableAPI.DataTable.CreateCellAsync(System.IO.Stream,Flux.SDK.DataTableAPI.ClientMetadata)">
+      <summary>Create new cell (Asyncronous method).</summary>
+      <param name="value">Value</param>
+      <param name="clientMetadata">ClientMetadata to associate with the cell.</param>
+      <returns>CellInfo of the newly created cell.</returns>
+      <exception cref="T:Flux.SDK.Exceptions.UnsupportedCapabilityException">Throws if Capability.CLIENT_METADATA is not supported.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.ConnectionFailureException">Throws if network connection is down.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.UnathorizedException">Throws if provided cookies were obsolete.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.ForbiddenException">Throws if this project is readonly.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.ServerUnavailableException">Throws if Flux server is down.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.InternalSDKException">Throws for unhandled SDK exceptions.</exception>
+    </member>
+    <member name="M:Flux.SDK.DataTableAPI.DataTable.CreateCellAsync(System.String,Flux.SDK.DataTableAPI.ClientMetadata)">
+      <summary>Create new cell (Asyncronous method).</summary>
+      <param name="json">Json value to set to the cell.</param>
+      <param name="clientMetadata">ClientMetadata to associate with the cell.</param>
+      <returns>CellInfo of the newly created cell.</returns>
+      <exception cref="T:Flux.SDK.Exceptions.UnsupportedCapabilityException">Throws if Capability.CLIENT_METADATA is not supported.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.ConnectionFailureException">Throws if network connection is down.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.UnathorizedException">Throws if provided cookies were obsolete.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.ForbiddenException">Throws if this project is readonly.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.ServerUnavailableException">Throws if Flux server is down.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.InternalSDKException">Throws for unhandled SDK exceptions.</exception>
+    </member>
+    <member name="M:Flux.SDK.DataTableAPI.DataTable.DeleteCell(System.String)">
+      <summary>Delete cell by id.</summary>
+      <param name="cellId">Id of the cell to be deleted.</param>
+      <returns>CellInfo of the deleted cell.</returns>
+      <exception cref="T:Flux.SDK.Exceptions.ConnectionFailureException">Throws if network connection is down.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.UnathorizedException">Throws if provided cookies were obsolete.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.ForbiddenException">Throws if project/cell is readonly.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.ServerUnavailableException">Throws if Flux server is down.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.InternalSDKException">Throws for unhandled SDK exceptions.</exception>
+    </member>
+    <member name="M:Flux.SDK.DataTableAPI.DataTable.DeleteCellAsync(System.String)">
+      <summary>Delete cell by id (Asyncronous method).</summary>
+      <param name="cellId">Id of the cell to be deleted.</param>
+      <returns>CellInfo of the deleted cell.</returns>
+      <exception cref="T:Flux.SDK.Exceptions.ConnectionFailureException">Throws if network connection is down.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.UnathorizedException">Throws if provided cookies were obsolete.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.ForbiddenException">Throws if project/cell is readonly.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.ServerUnavailableException">Throws if Flux server is down.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.InternalSDKException">Throws for unhandled SDK exceptions.</exception>
+    </member>
+    <member name="M:Flux.SDK.DataTableAPI.DataTable.Subscribe(Flux.SDK.DataTableAPI.NotificationType)">
+      <summary>Subscribe to cell events. Note: call only if NOTIFICATION capability is supported.</summary>
+      <param name="notificationsTypes">Notification type to subscribe for</param>
+      <exception cref="T:Flux.SDK.Exceptions.UnsupportedCapabilityException">Throws if NOTIFICATION is not supported.</exception>
+    </member>
+    <member name="M:Flux.SDK.DataTableAPI.DataTable.SubscribeToAllNotifications">
+      <summary>Subscribe to cell events. Note: call only if NOTIFICATION capability is supported.</summary>
+      <exception cref="T:Flux.SDK.Exceptions.InternalSDKException">Throws for unhandled SDK exceptions.</exception>
+    </member>
+    <member name="M:Flux.SDK.DataTableAPI.DataTable.Unsubscribe(Flux.SDK.DataTableAPI.NotificationType)">
+      <summary>Unsubscribe from datatable notifications.</summary>
+      <param name="notificationsType">Notification type to unsubscribe from</param>
+    </member>
+    <member name="M:Flux.SDK.DataTableAPI.DataTable.GetCellValueReference(System.String,System.Boolean,System.Boolean)">
+      <summary>Provides a permanent reference to value. Note: call only if VALUE_REFERENCE capability is supported.</summary>
+      <param name="cellId">Id of the cell.</param>
+      <param name="extractCellMetadata">If set to true then metadata associated with this cell will be extracted.</param>
+      <param name="extractClientMetadata">If set to true then client metadata associated with this cell will be extracted.</param>
+      <returns>Permanent reference to value</returns>
+      <exception cref="T:Flux.SDK.Exceptions.UnsupportedCapabilityException">Throws if VALUE_REFERENCE is not supported.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.ConnectionFailureException">Throws if network connection is down.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.UnathorizedException">Throws if provided cookies were obsolete.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.ServerUnavailableException">Throws if Flux server is down.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.InternalSDKException">Throws for unhandled SDK exceptions.</exception>
+    </member>
+    <member name="M:Flux.SDK.DataTableAPI.DataTable.GetCellValueReference(Flux.SDK.DataTableAPI.CellInfo,System.Boolean,System.Boolean)">
+      <summary>Provides a permanent reference to value. Note: call only if VALUE_REFERENCE capability is supported.</summary>
+      <param name="cell">CellInfo</param>
+      <param name="extractCellMetadata">If set to true then metadata associated with this cell will be extracted.</param>
+      <param name="extractClientMetadata">If set to true then client metadata associated with this cell will be extracted.</param>
+      <returns>Permanent reference to value</returns>
+      <exception cref="T:Flux.SDK.Exceptions.UnsupportedCapabilityException">Throws if VALUE_REFERENCE is not supported.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.ConnectionFailureException">Throws if network connection is down.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.UnathorizedException">Throws if provided cookies were obsolete.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.ServerUnavailableException">Throws if Flux server is down.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.InternalSDKException">Throws for unhandled SDK exceptions.</exception>
+    </member>
+    <member name="M:Flux.SDK.DataTableAPI.DataTable.GetCellValueReferenceAsync(System.String,System.Boolean,System.Boolean)">
+      <summary>Provides a permanent reference to value. Note: call only if VALUE_REFERENCE capability is supported (Asyncronous method).</summary>
+      <param name="cellId">Id of the cell.</param>
+      <param name="extractCellMetadata">If set to true then metadata associated with this cell will be extracted.</param>
+      <param name="extractClientMetadata">If set to true then client metadata associated with this cell will be extracted.</param>
+      <returns>Permanent reference to value</returns>
+      <exception cref="T:Flux.SDK.Exceptions.UnsupportedCapabilityException">Throws if VALUE_REFERENCE is not supported.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.ConnectionFailureException">Throws if network connection is down.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.UnathorizedException">Throws if provided cookies were obsolete.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.ServerUnavailableException">Throws if Flux server is down.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.InternalSDKException">Throws for unhandled SDK exceptions.</exception>
+    </member>
+    <member name="M:Flux.SDK.DataTableAPI.DataTable.GetCellValueReferenceAsync(Flux.SDK.DataTableAPI.CellInfo,System.Boolean,System.Boolean)">
+      <summary>Provides a permanent reference to value. Note: call only if VALUE_REFERENCE capability is supported (Asyncronous method).</summary>
+      <param name="cell">CellInfo of the cell.</param>
+      <param name="extractCellMetadata">If set to true then metadata associated with this cell will be extracted.</param>
+      <param name="extractClientMetadata">If set to true then client metadata associated with this cell will be extracted.</param>
+      <returns>Permanent reference to value</returns>
+      <exception cref="T:Flux.SDK.Exceptions.UnsupportedCapabilityException">Throws if VALUE_REFERENCE is not supported.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.ConnectionFailureException">Throws if network connection is down.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.UnathorizedException">Throws if provided cookies were obsolete.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.ServerUnavailableException">Throws if Flux server is down.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.InternalSDKException">Throws for unhandled SDK exceptions.</exception>
+    </member>
+    <member name="M:Flux.SDK.DataTableAPI.DataTable.DereferenceCellValueRef(System.String,System.Boolean,System.Boolean,System.Boolean)">
+      <summary>Dereference a permanent reference to value. Note: call only if VALUE_REFERENCE capability is supported.</summary>
+      <param name="valueRef">Cell reference to release.</param>
+      <param name="extractValueMetadata">If set to true then metadata associated with the value will be extracted.</param>
+      <param name="extractCellMetadata">If set to true then metadata associated with this cell will be extracted.</param>
+      <param name="extractClientMetadata">If set to true then client metadata associated with this cell will be extracted.</param>
+      <returns>CellReleaseRefResult</returns>
+      <exception cref="T:Flux.SDK.Exceptions.UnsupportedCapabilityException">Throws if VALUE_REFERENCE is not supported.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.ConnectionFailureException">Throws if network connection is down.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.UnathorizedException">Throws if provided cookies were obsolete.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.ServerUnavailableException">Throws if Flux server is down.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.InternalSDKException">Throws for unhandled SDK exceptions.</exception>
+    </member>
+    <member name="M:Flux.SDK.DataTableAPI.DataTable.DereferenceCellValueRefAsync(System.String,System.Boolean,System.Boolean,System.Boolean)">
+      <summary>Dereference a permanent reference to value. Note: call only if VALUE_REFERENCE capability is supported (Asyncronous method).</summary>
+      <param name="valueRef">Cell reference to release.</param>
+      <param name="extractValueMetadata">If set to true then metadata associated with the value will be extracted.</param>
+      <param name="extractCellMetadata">If set to true then metadata associated with this cell will be extracted.</param>
+      <param name="extractClientMetadata">If set to true then client metadata associated with this cell will be extracted.</param>
+      <returns>
+      </returns>
+      <exception cref="T:Flux.SDK.Exceptions.UnsupportedCapabilityException">Throws if VALUE_REFERENCE is not supported.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.ConnectionFailureException">Throws if network connection is down.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.UnathorizedException">Throws if provided cookies were obsolete.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.ServerUnavailableException">Throws if Flux server is down.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.InternalSDKException">Throws for unhandled SDK exceptions.</exception>
+    </member>
+    <member name="M:Flux.SDK.DataTableAPI.DataTable.UpdateCellsAsync">
+      <summary>Get Cells for current project (Asyncronous method).</summary>
+      <returns>List of CellInfo</returns>
+      <exception cref="T:Flux.SDK.Exceptions.ConnectionFailureException">Throws if network connection is down.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.UnathorizedException">Throws if provided cookies were obsolete.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.ServerUnavailableException">Throws if Flux server is down.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.InternalSDKException">Throws for unhandled SDK exceptions.</exception>
+    </member>
+    <member name="M:Flux.SDK.DataTableAPI.DataTable.UpdateCells">
+      <summary>Get Cells for current project.</summary>
+      <returns>List of CellInfo</returns>
+      <exception cref="T:Flux.SDK.Exceptions.ConnectionFailureException">Throws if network connection is down.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.UnathorizedException">Throws if provided cookies were obsolete.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.ServerUnavailableException">Throws if Flux server is down.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.InternalSDKException">Throws for unhandled SDK exceptions.</exception>
+    </member>
+    <member name="M:Flux.SDK.DataTableAPI.DataTable.GetCapabilities">
+      <summary>Get capabilities supported for current project.</summary>
+      <returns>Capability</returns>
+      <exception cref="T:Flux.SDK.Exceptions.ConnectionFailureException">Throws if network connection is down.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.UnathorizedException">Throws if provided cookies were obsolete.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.ServerUnavailableException">Throws if Flux server is down.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.InternalSDKException">Throws for unhandled SDK exceptions.</exception>
+    </member>
+    <member name="P:Flux.SDK.DataTableAPI.DataTable.ProgressTracker">
+      <summary>Provides ability to track the progress.</summary>
+    </member>
+    <member name="P:Flux.SDK.DataTableAPI.DataTable.Cells">
+      <summary>Returns datatable cells list.</summary>
+      <exception cref="T:Flux.SDK.Exceptions.ConnectionFailureException">Throws if network connection is down.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.UnathorizedException">Throws if provided cookies were obsolete.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.ServerUnavailableException">Throws if Flux server is down.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.InternalSDKException">Throws for unhandled SDK exceptions.</exception>
+    </member>
+    <member name="P:Flux.SDK.DataTableAPI.DataTable.Capability">
+      <summary>Returns Capability of the datatable.</summary>
+    </member>
+    <member name="E:Flux.SDK.DataTableAPI.DataTable.OnNotification">
+      <summary>Occurs when notification is received.</summary>
+    </member>
+    <member name="E:Flux.SDK.DataTableAPI.DataTable.OnError">
+      <summary>Occurs when error message received.</summary>
+    </member>
+    <member name="T:Flux.SDK.DataTableAPI.Capability">
+      <summary>Contains available datatable capabilities</summary>
+    </member>
+    <member name="F:Flux.SDK.DataTableAPI.Capability.NONE">
+      <summary>Datatable capability not set.</summary>
+    </member>
+    <member name="F:Flux.SDK.DataTableAPI.Capability.METADATA">
+      <summary>Cell metadata is available.</summary>
+    </member>
+    <member name="F:Flux.SDK.DataTableAPI.Capability.CLIENT_METADATA">
+      <summary>Cell client metadata is available.</summary>
+    </member>
+    <member name="F:Flux.SDK.DataTableAPI.Capability.NOTIFICATION">
+      <summary>Cell notifications are available.</summary>
+    </member>
+    <member name="F:Flux.SDK.DataTableAPI.Capability.VALUE_REFERENCE">
+      <summary>Access to cell value using reference is available.</summary>
+    </member>
+    <member name="F:Flux.SDK.DataTableAPI.Capability.HISTORY">
+      <summary>Cell values history is available</summary>
+    </member>
+    <member name="T:Flux.SDK.DataTableAPI.NotificationType">
+      <summary>Contains available notification types</summary>
+    </member>
+    <member name="F:Flux.SDK.DataTableAPI.NotificationType.__NONE__">
+      <summary>Notification type not set.</summary>
+    </member>
+    <member name="F:Flux.SDK.DataTableAPI.NotificationType.CELL_MODIFIED">
+      <summary>Cell modified notification.</summary>
+    </member>
+    <member name="F:Flux.SDK.DataTableAPI.NotificationType.CELL_CREATED">
+      <summary>Cell created notification.</summary>
+    </member>
+    <member name="F:Flux.SDK.DataTableAPI.NotificationType.CELL_DELETED">
+      <summary>Cell deleted notification.</summary>
+    </member>
+    <member name="F:Flux.SDK.DataTableAPI.NotificationType.CELL_CLIENT_METADATA_MODIFIED">
+      <summary>Cell metadata modified notification.</summary>
+    </member>
+    <member name="F:Flux.SDK.DataTableAPI.NotificationType.__ALL__">
+      <summary>All notification listed above are set.</summary>
+    </member>
+    <member name="T:Flux.SDK.Exceptions">
+      <summary>Provides SDK specific exceptions</summary>
+    </member>
+    <member name="T:Flux.SDK.Exceptions.FluxException">
+      <summary>
+            Basic class for informative SDK Exceptions (Network is down, etc.).
+            </summary>
+    </member>
+    <member name="M:Flux.SDK.Exceptions.FluxException.#ctor(System.String)">
+      <summary>Initializes a new instance of the FluxException class with a specified error message.</summary>
+      <param name="message">The error message that explains the reason for the exception.</param>
+    </member>
+    <member name="M:Flux.SDK.Exceptions.FluxException.#ctor(System.String,System.Exception)">
+      <summary>Initializes a new instance of the FluxException class with a specified error message and a reference to the inner exception that is the cause of this exception.</summary>
+            /// <param name="message">The error message that explains the reason for the exception.</param><param name="innerException">The exception that is the cause of the current exception</param></member>
+    <member name="T:Flux.SDK.Exceptions.InternalException">
+      <summary>
+            Basic class for fatal SDK Exceptions.
+            </summary>
+    </member>
+    <member name="M:Flux.SDK.Exceptions.InternalException.#ctor(System.String)">
+      <summary>Initializes a new instance of the InternalException class with a specified error message.</summary>
+      <param name="message">The error message that explains the reason for the exception.</param>
+    </member>
+    <member name="T:Flux.SDK.Exceptions.InternalSDKException">
+      <summary>
+            Throws for unhandled SDK exceptions.
+            </summary>
+    </member>
+    <member name="T:Flux.SDK.Exceptions.UnsupportedCapabilityException">
+      <summary>
+            Throws if required Capability is not supported.
+            </summary>
+    </member>
+    <member name="T:Flux.SDK.Exceptions.NetworkException">
+      <summary>
+            Throws if server returns error code.
+            </summary>
+    </member>
+    <member name="P:Flux.SDK.Exceptions.NetworkException.ErrorCode">
+      <summary>Represents Error code of Network Exception.</summary>
+    </member>
+    <member name="T:Flux.SDK.Exceptions.AuthorizationFailedException">
+      <summary>
+            Throws if OIC authorization process failed.
+            </summary>
+    </member>
+    <member name="T:Flux.SDK.Exceptions.ConnectionFailureException">
+      <summary>
+            Throws if network connection is down.
+            </summary>
+    </member>
+    <member name="T:Flux.SDK.Exceptions.UnathorizedException">
+      <summary>
+            Throws if provided cookies were obsolete.
+            </summary>
+    </member>
+    <member name="T:Flux.SDK.Exceptions.ForbiddenException">
+      <summary>
+            Throws if the project/cell is readonly.
+            </summary>
+    </member>
+    <member name="T:Flux.SDK.Exceptions.NotFoundException">
+      <summary>
+            Throws if the requested data was moved or deleted.
+            </summary>
+    </member>
+    <member name="T:Flux.SDK.Exceptions.ServerUnavailableException">
+      <summary>
+            Throws if Flux server is down.
+            </summary>
+    </member>
+    <member name="T:Flux.SDK.Properties.FluxApiData">
+      <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+    </member>
+    <member name="P:Flux.SDK.Properties.FluxApiData.ResourceManager">
+      <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+    </member>
+    <member name="P:Flux.SDK.Properties.FluxApiData.Culture">
+      <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+    </member>
+    <member name="P:Flux.SDK.Properties.FluxApiData.CapabilityUrl">
+      <summary>
+              Looks up a localized string similar to /capability.
+            </summary>
+    </member>
+    <member name="P:Flux.SDK.Properties.FluxApiData.CellBaseUrl">
+      <summary>
+              Looks up a localized string similar to /cells.
+            </summary>
+    </member>
+    <member name="P:Flux.SDK.Properties.FluxApiData.CellIdUrl">
+      <summary>
+              Looks up a localized string similar to /cells/{0}.
+            </summary>
+    </member>
+    <member name="P:Flux.SDK.Properties.FluxApiData.CellUrl">
+      <summary>
+              Looks up a localized string similar to /p/{0}/api/datatable/v1/cells/{1}.
+            </summary>
+    </member>
+    <member name="P:Flux.SDK.Properties.FluxApiData.CellValueRef">
+      <summary>
+              Looks up a localized string similar to /cells/{0}/ref.
+            </summary>
+    </member>
+    <member name="P:Flux.SDK.Properties.FluxApiData.ConvertUrl">
+      <summary>
+              Looks up a localized string similar to p/{0}/api/blockexec?block=flux-internal/parasolid/Parasolid.
+            </summary>
+    </member>
+    <member name="P:Flux.SDK.Properties.FluxApiData.CookiesAuthName">
+      <summary>
+              Looks up a localized string similar to auth.
+            </summary>
+    </member>
+    <member name="P:Flux.SDK.Properties.FluxApiData.CookiesTokenName">
+      <summary>
+              Looks up a localized string similar to flux_token.
+            </summary>
+    </member>
+    <member name="P:Flux.SDK.Properties.FluxApiData.DataTableAPIUrl">
+      <summary>
+              Looks up a localized string similar to /p/{0}/api/datatable/v1.
+            </summary>
+    </member>
+    <member name="P:Flux.SDK.Properties.FluxApiData.DefaultServer">
+      <summary>
+              Looks up a localized string similar to flux.io.
+            </summary>
+    </member>
+    <member name="P:Flux.SDK.Properties.FluxApiData.DefaultServerUrl">
+      <summary>
+              Looks up a localized string similar to https://flux.io.
+            </summary>
+    </member>
+    <member name="P:Flux.SDK.Properties.FluxApiData.DownloadUrl">
+      <summary>
+              Looks up a localized string similar to downloads/.
+            </summary>
+    </member>
+    <member name="P:Flux.SDK.Properties.FluxApiData.EnvUrl">
+      <summary>
+              Looks up a localized string similar to /api/env.
+            </summary>
+    </member>
+    <member name="P:Flux.SDK.Properties.FluxApiData.FluxCookiesData">
+      <summary>
+              Looks up a localized string similar to Flux\fluxData.bin.
+            </summary>
+    </member>
+    <member name="P:Flux.SDK.Properties.FluxApiData.ForgetUrl">
+      <summary>
+              Looks up a localized string similar to forgotpw.
+            </summary>
+    </member>
+    <member name="P:Flux.SDK.Properties.FluxApiData.HeaderAcceptEncoding">
+      <summary>
+              Looks up a localized string similar to Accept-Encoding.
+            </summary>
+    </member>
+    <member name="P:Flux.SDK.Properties.FluxApiData.HeaderContentEncoding">
+      <summary>
+              Looks up a localized string similar to Content-encoding.
+            </summary>
+    </member>
+    <member name="P:Flux.SDK.Properties.FluxApiData.HeadersAux">
+      <summary>
+              Looks up a localized string similar to Flux-Auxiliary-Return.
+            </summary>
+    </member>
+    <member name="P:Flux.SDK.Properties.FluxApiData.HeadersHostFile">
+      <summary>
+              Looks up a localized string similar to Flux-Plugin-Host-File.
+            </summary>
+    </member>
+    <member name="P:Flux.SDK.Properties.FluxApiData.HeadersHostName">
+      <summary>
+              Looks up a localized string similar to Flux-Plugin-Host.
+            </summary>
+    </member>
+    <member name="P:Flux.SDK.Properties.FluxApiData.HeadersHostVersion">
+      <summary>
+              Looks up a localized string similar to Flux-Plugin-Host-Version.
+            </summary>
+    </member>
+    <member name="P:Flux.SDK.Properties.FluxApiData.HeadersOpt">
+      <summary>
+              Looks up a localized string similar to Flux-Options.
+            </summary>
+    </member>
+    <member name="P:Flux.SDK.Properties.FluxApiData.HeadersPluginPlatform">
+      <summary>
+              Looks up a localized string similar to Flux-Plugin-Platform.
+            </summary>
+    </member>
+    <member name="P:Flux.SDK.Properties.FluxApiData.HeadersPluginVersion">
+      <summary>
+              Looks up a localized string similar to Flux-Plugin-Version.
+            </summary>
+    </member>
+    <member name="P:Flux.SDK.Properties.FluxApiData.HeadersRequestMarker">
+      <summary>
+              Looks up a localized string similar to Flux-Request-Marker.
+            </summary>
+    </member>
+    <member name="P:Flux.SDK.Properties.FluxApiData.HeadersRequestToken">
+      <summary>
+              Looks up a localized string similar to Flux-Request-Token.
+            </summary>
+    </member>
+    <member name="P:Flux.SDK.Properties.FluxApiData.HelpUrl">
+      <summary>
+              Looks up a localized string similar to https://community.flux.io/.
+            </summary>
+    </member>
+    <member name="P:Flux.SDK.Properties.FluxApiData.HostProgramMainFile">
+      <summary>
+              Looks up a localized string similar to HostProgramMainFile.
+            </summary>
+    </member>
+    <member name="P:Flux.SDK.Properties.FluxApiData.HostProgramVersion">
+      <summary>
+              Looks up a localized string similar to HostProgramVersion.
+            </summary>
+    </member>
+    <member name="P:Flux.SDK.Properties.FluxApiData.LoginUrl">
+      <summary>
+              Looks up a localized string similar to /api/login.
+            </summary>
+    </member>
+    <member name="P:Flux.SDK.Properties.FluxApiData.MyProfileUrl">
+      <summary>
+              Looks up a localized string similar to home/#!/me.
+            </summary>
+    </member>
+    <member name="P:Flux.SDK.Properties.FluxApiData.ProjectDeleteUrl">
+      <summary>
+              Looks up a localized string similar to /p/{0}.
+            </summary>
+    </member>
+    <member name="P:Flux.SDK.Properties.FluxApiData.ProjectMetaUrl">
+      <summary>
+              Looks up a localized string similar to /p/{0}/api/meta.
+            </summary>
+    </member>
+    <member name="P:Flux.SDK.Properties.FluxApiData.ProjectsUrl">
+      <summary>
+              Looks up a localized string similar to /api/projects.
+            </summary>
+    </member>
+    <member name="P:Flux.SDK.Properties.FluxApiData.RefUrl">
+      <summary>
+              Looks up a localized string similar to /ref.
+            </summary>
+    </member>
+    <member name="P:Flux.SDK.Properties.FluxApiData.RegisterUrl">
+      <summary>
+              Looks up a localized string similar to signup/.
+            </summary>
+    </member>
+    <member name="P:Flux.SDK.Properties.FluxApiData.ReleaseNotesUrl">
+      <summary>
+              Looks up a localized string similar to r/#!/release-notes.
+            </summary>
+    </member>
+    <member name="P:Flux.SDK.Properties.FluxApiData.SerializationDll">
+      <summary>
+              Looks up a localized string similar to Flux.Serialization.dll.
+            </summary>
+    </member>
+    <member name="P:Flux.SDK.Properties.FluxApiData.TokenUrl">
+      <summary>
+              Looks up a localized string similar to /api/token.
+            </summary>
+    </member>
+    <member name="P:Flux.SDK.Properties.FluxApiData.TypeKeyName">
+      <summary>
+              Looks up a localized string similar to primitive.
+            </summary>
+    </member>
+    <member name="P:Flux.SDK.Properties.FluxApiData.UpdateKeyName">
+      <summary>
+              Looks up a localized string similar to data-key-update.
+            </summary>
+    </member>
+    <member name="P:Flux.SDK.Properties.FluxApiData.ValueRefUrl">
+      <summary>
+              Looks up a localized string similar to /value/{0}.
+            </summary>
+    </member>
+    <member name="P:Flux.SDK.Properties.FluxApiData.WebSocketUrl">
+      <summary>
+              Looks up a localized string similar to /p/{0}/wsurl?reason={1}.
+            </summary>
+    </member>
+    <member name="P:Flux.SDK.Properties.FluxApiData.WhoAmIUrl">
+      <summary>
+              Looks up a localized string similar to /api/whoami.
+            </summary>
+    </member>
+    <member name="T:Flux.SDK.OnUserLoggedInHandler">
+      <summary> A delegate type for hooking up User logged in notifications. </summary>
+    </member>
+    <member name="T:Flux.SDK.OnUserLoggedOutHandler">
+      <summary> A delegate type for hooking up User logged out notifications. </summary>
+    </member>
+    <member name="T:Flux.SDK.FluxSDK">
+      <summary>Provides access to work with Flux.</summary>
+    </member>
+    <member name="M:Flux.SDK.FluxSDK.#ctor(System.String,System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.Uri)">
+      <summary>Creates instanse of Flux SDK</summary>
+      <param name="clientId">The client ID provided to you when you created your app.</param>
+      <param name="clientVersion">Version of the your app (optional).</param>
+      <param name="additionalClientData">HostProgramVersion and HostProgramMainFile are required.</param>
+      <param name="fluxUrl">Use to override the base Flux URL, e.g., for testing purposes. (optional)</param>
+    </member>
+    <member name="M:Flux.SDK.FluxSDK.Login(System.String,System.String)">
+      <summary>Log in user using OIDC code flow.</summary>
+      <param name="clientSecret">ClientSecret to be used to request a token.</param>
+      <param name="pluginInfoUrl">Info url to navigate to after login.</param>
+      <exception cref="T:Flux.SDK.Exceptions.AuthorizationFailedException">Throws if OIC authorization process failed.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.ConnectionFailureException">Throws if network connection is down.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.ServerUnavailableException">Throws if Flux server is down.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.InternalSDKException">Throws for unhandled SDK exceptions.</exception>
+    </member>
+    <member name="M:Flux.SDK.FluxSDK.Logout">
+      <summary>Logout the current user, clears saved cookies.</summary>
+    </member>
+    <member name="M:Flux.SDK.FluxSDK.GetSupportedVersions">
+      <summary>Obtain plugin versions supported by Flux</summary>
+      <returns>List of products and versions currently supported by Flux.</returns>
+      <exception cref="T:Flux.SDK.Exceptions.FluxException">Throws for internal SDK exceptions (Network is down, etc.).</exception>
+      <exception cref="T:Flux.SDK.Exceptions.ConnectionFailureException">Throws if network connection is down.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.ServerUnavailableException">Throws if Flux server is down.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.InternalSDKException">Throws for unhandled SDK exceptions.</exception>
+    </member>
+    <member name="M:Flux.SDK.FluxSDK.InitUserFromCookies(System.String)">
+      <summary>Trying to init user from cookies.</summary>
+      <param name="clientId">ClientId of the application.</param>
+    </member>
+    <member name="P:Flux.SDK.FluxSDK.CurrentUser">
+      <summary>Returns currently logged in user information.</summary>
+    </member>
+    <member name="P:Flux.SDK.FluxSDK.FluxUri">
+      <summary>Base server uri.</summary>
+    </member>
+    <member name="P:Flux.SDK.FluxSDK.FluxHeaders">
+      <summary>Headers to be sent with all sdk requests to the server.</summary>
+    </member>
+    <member name="P:Flux.SDK.FluxSDK.AdditionalClientData">
+      <summary>Allows plugin to set up file host name before pushing data.</summary>
+    </member>
+    <member name="E:Flux.SDK.FluxSDK.OnUserLogin">
+      <summary>Occurs when user is logged in to Flux.</summary>
+    </member>
+    <member name="E:Flux.SDK.FluxSDK.OnUserLogout">
+      <summary>Occurs when user is logged out.</summary>
+    </member>
+    <member name="T:Flux.SDK.Properties.Resources">
+      <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+    </member>
+    <member name="P:Flux.SDK.Properties.Resources.ResourceManager">
+      <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+    </member>
+    <member name="P:Flux.SDK.Properties.Resources.Culture">
+      <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+    </member>
+    <member name="P:Flux.SDK.Properties.Resources.ConvertersPath">
+      <summary>
+              Looks up a localized string similar to Converters.
+            </summary>
+    </member>
+    <member name="P:Flux.SDK.Properties.Resources.CredentialsPath">
+      <summary>
+              Looks up a localized string similar to Flux\data.bin.
+            </summary>
+    </member>
+    <member name="P:Flux.SDK.Properties.Resources.EmailString">
+      <summary>
+              Looks up a localized string similar to Email address.
+            </summary>
+    </member>
+    <member name="P:Flux.SDK.Properties.Resources.EmptyFieldsMsg">
+      <summary>
+              Looks up a localized string similar to Email address should not be empty. Please enter your email address..
+            </summary>
+    </member>
+    <member name="P:Flux.SDK.Properties.Resources.HostsActiveServerURL">
+      <summary>
+              Looks up a localized string similar to activeServerURL.
+            </summary>
+    </member>
+    <member name="P:Flux.SDK.Properties.Resources.HostsFileName">
+      <summary>
+              Looks up a localized string similar to Hosts.xml.
+            </summary>
+    </member>
+    <member name="P:Flux.SDK.Properties.Resources.HostsServerListURL">
+      <summary>
+              Looks up a localized string similar to serverURL.
+            </summary>
+    </member>
+    <member name="P:Flux.SDK.Properties.Resources.LogCofigFileName">
+      <summary>
+              Looks up a localized string similar to Flux.config.
+            </summary>
+    </member>
+    <member name="P:Flux.SDK.Properties.Resources.PasswordString">
+      <summary>
+              Looks up a localized string similar to Password.
+            </summary>
+    </member>
+    <member name="P:Flux.SDK.Properties.Resources.SDKName">
+      <summary>
+              Looks up a localized string similar to Flux.SDK.
+            </summary>
+    </member>
+    <member name="T:Flux.SDK.Types.Project">
+      <summary>Represents the user project</summary>
+    </member>
+    <member name="T:Flux.SDK.Types.Project.ProjectKind">
+      <summary>Represents the kind of the project</summary>
+    </member>
+    <member name="F:Flux.SDK.Types.Project.ProjectKind.None">
+      <summary>Project kind not set</summary>
+    </member>
+    <member name="F:Flux.SDK.Types.Project.ProjectKind.Full">
+      <summary>Represents full access to project</summary>
+    </member>
+    <member name="F:Flux.SDK.Types.Project.ProjectKind.Readonly">
+      <summary>Represents readonly access to project</summary>
+    </member>
+    <member name="T:Flux.SDK.Types.Project.UserRoleType">
+      <summary>Represents the user role on the project</summary>
+    </member>
+    <member name="F:Flux.SDK.Types.Project.UserRoleType.None">
+      <summary>User role not set.</summary>
+    </member>
+    <member name="F:Flux.SDK.Types.Project.UserRoleType.Owner">
+      <summary>Set if user is owner for project</summary>
+    </member>
+    <member name="F:Flux.SDK.Types.Project.UserRoleType.Collaborator">
+      <summary>Set if user is collaborator for project</summary>
+    </member>
+    <member name="F:Flux.SDK.Types.Project.UserRoleType.Viewer">
+      <summary>Set if user is viewer for project</summary>
+    </member>
+    <member name="M:Flux.SDK.Types.Project.ConvertBrep(System.String,System.String,System.String)">
+      <summary>Convert brep to specified format.</summary>
+      <param name="content">Brep to convert (base64 encoded string).</param>
+      <param name="sourceFormat">Source format of brep.</param>
+      <param name="targetFormat">Target format of brep</param>
+      <returns>Converted brep (base64 encoded string).</returns>
+      <exception cref="T:Flux.SDK.Exceptions.ConnectionFailureException">Throws if network connection is down.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.UnathorizedException">Throws if provided cookies were obsolete.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.ServerUnavailableException">Throws if Flux server is down.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.InternalSDKException">Throws for unhandled SDK exceptions.</exception>
+    </member>
+    <member name="M:Flux.SDK.Types.Project.TessellateBrep(System.String,System.String,System.Object,System.Object)">
+      <summary>
+            Tessellates brep.
+            </summary>
+      <param name="content">Brep to tesselate (base64 encoded string).</param>
+      <param name="sourceFormat">Source format of brep.</param>
+      <param name="lod">Level of detail of the brep.</param>
+      <param name="unit">Units of the brep.</param>
+      <returns>Tessellated brep (base64 encoded string).</returns>
+      <exception cref="T:Flux.SDK.Exceptions.ConnectionFailureException">Throws if network connection is down.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.UnathorizedException">Throws if provided cookies were obsolete.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.ServerUnavailableException">Throws if Flux server is down.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.InternalSDKException">Throws for unhandled SDK exceptions.</exception>
+    </member>
+    <member name="P:Flux.SDK.Types.Project.Id">
+      <summary>The project id</summary>
+    </member>
+    <member name="P:Flux.SDK.Types.Project.Name">
+      <summary>The project name</summary>
+    </member>
+    <member name="P:Flux.SDK.Types.Project.Creator">
+      <summary>The project creator</summary>
+    </member>
+    <member name="P:Flux.SDK.Types.Project.UpdatedDate">
+      <summary>The project last update date</summary>
+    </member>
+    <member name="P:Flux.SDK.Types.Project.CreatedDate">
+      <summary>The project creation date</summary>
+    </member>
+    <member name="P:Flux.SDK.Types.Project.UserRole">
+      <summary>The user role on the project</summary>
+    </member>
+    <member name="P:Flux.SDK.Types.Project.Kind">
+      <summary>The project kind</summary>
+    </member>
+    <member name="P:Flux.SDK.Types.Project.IsReadOnly">
+      <summary>Gets whether project is readonly</summary>
+    </member>
+    <member name="P:Flux.SDK.Types.Project.DataTable">
+      <summary>Returns datatable for the project</summary>
+    </member>
+    <member name="T:Flux.SDK.Types.User">
+      <summary>Represents the Flux user</summary>
+    </member>
+    <member name="M:Flux.SDK.Types.User.CreateNewProject(System.String)">
+      <summary>Create new project.</summary>
+      <param name="projectName">name of the new project.</param>
+      <returns>Project instance if project was created successfully.</returns>
+      <exception cref="T:Flux.SDK.Exceptions.ConnectionFailureException">Throws if network connection is down.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.UnathorizedException">Throws if provided cookies were obsolete.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.InternalSDKException">Throws for unhandled SDK exceptions.</exception>
+    </member>
+    <member name="M:Flux.SDK.Types.User.CreateNewProjectAsync(System.String)">
+      <summary>Create new project.</summary>
+      <param name="projectName">name of the new project.</param>
+      <returns>Porject instance if project was created successully.</returns>
+      <exception cref="T:Flux.SDK.Exceptions.FluxException">Throws for internal SDK exceptions (Network is down, etc.).</exception>
+      <exception cref="T:Flux.SDK.Exceptions.InternalSDKException">Throws for unhandled SDK exceptions.</exception>
+    </member>
+    <member name="M:Flux.SDK.Types.User.DeleteProject(System.String)">
+      <summary>Delete project by id.</summary>
+      <param name="projectId">Id of the project to be deleted.</param>
+      <returns>true if project was deleted successfully.</returns>
+      <exception cref="T:Flux.SDK.Exceptions.ConnectionFailureException">Throws if network connection is down.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.UnathorizedException">Throws if provided cookies were obsolete.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.ForbiddenException">Throws if user doesn't have rights to delete this project.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.InternalSDKException">Throws for unhandled SDK exceptions.</exception>
+    </member>
+    <member name="M:Flux.SDK.Types.User.DeleteProjectAsync(System.String)">
+      <summary>Delete project by id.</summary>
+      <param name="projectId">Id of the project to be deleted.</param>
+      <returns>true if project was deleted successfully.</returns>
+      <exception cref="T:Flux.SDK.Exceptions.ConnectionFailureException">Throws if network connection is down.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.UnathorizedException">Throws if provided cookies were obsolete.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.ForbiddenException">Throws if user doesn't have rights to delete this project.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.InternalSDKException">Throws for unhandled SDK exceptions.</exception>
+    </member>
+    <member name="M:Flux.SDK.Types.User.UpdateProjectsAsync">
+      <summary>Update list of projects for the current user. </summary>
+      <exception cref="T:Flux.SDK.Exceptions.ConnectionFailureException">Throws if network connection is down.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.UnathorizedException">Throws if provided cookies were obsolete.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.ServerUnavailableException">Throws if Flux server is down.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.InternalSDKException">Throws for unhandled SDK exceptions.</exception>
+    </member>
+    <member name="M:Flux.SDK.Types.User.UpdateProjects">
+      <summary>Update list of projects for the current user. </summary>
+      <exception cref="T:Flux.SDK.Exceptions.ConnectionFailureException">Throws if network connection is down.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.UnathorizedException">Throws if provided cookies were obsolete.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.ServerUnavailableException">Throws if Flux server is down.</exception>
+      <exception cref="T:Flux.SDK.Exceptions.InternalSDKException">Throws for unhandled SDK exceptions.</exception>
+    </member>
+    <member name="P:Flux.SDK.Types.User.Id">
+      <summary>The user id</summary>
+    </member>
+    <member name="P:Flux.SDK.Types.User.FirstName">
+      <summary>The user first name </summary>
+    </member>
+    <member name="P:Flux.SDK.Types.User.LastName">
+      <summary>The user last name</summary>
+    </member>
+    <member name="P:Flux.SDK.Types.User.Email">
+      <summary>The user email</summary>
+    </member>
+    <member name="P:Flux.SDK.Types.User.Kind">
+      <summary>The user kind</summary>
+    </member>
+    <member name="P:Flux.SDK.Types.User.FullName">
+      <summary>The user full name</summary>
+    </member>
+    <member name="P:Flux.SDK.Types.User.Projects">
+      <summary>The user's projects</summary>
+    </member>
+    <member name="T:Flux.SDK.DataTableAPI.CellMetadata">
+      <summary>Represents metadata information of the cell</summary>
+      <remarks>Relevant to services which support the METADATA capability</remarks>
+      <remarks>All cellInfo structures will include a Metadata field.</remarks>
+    </member>
+    <member name="P:Flux.SDK.DataTableAPI.CellMetadata.Create">
+      <summary>Information about the cell creation</summary>
+      <remarks>Currently the only field populated in the CellEvent for Create is the Time.</remarks>
+    </member>
+    <member name="P:Flux.SDK.DataTableAPI.CellMetadata.Modify">
+      <summary>Information about the cell modification</summary>
+    </member>
+    <member name="T:Flux.SDK.StreamUtils">
+      <summary>Contains useful methods for Stream</summary>
+    </member>
+    <member name="M:Flux.SDK.StreamUtils.GetDecompressedResponseStream(System.Net.HttpWebResponse)">
+      <summary>
+            Decompresses response stream
+            </summary>
+      <param name="response">Response stream to decompress</param>
+      <returns>Decompressed response stream</returns>
+    </member>
+    <member name="M:Flux.SDK.StreamUtils.GenerateStreamFromString(System.String)">
+      <summary>
+            Generates stream from the specified string
+            </summary>
+      <param name="s">The string to generate stream from</param>
+      <returns>Generated stream</returns>
+    </member>
+    <member name="M:Flux.SDK.StreamUtils.GetStringFromStreamAsync(System.IO.Stream,System.Int64)">
+      <summary>
+            Generates string from the specified stream asynchronously
+            </summary>
+      <param name="stream">The stream to generate string from</param>
+      <param name="length">The stream length</param>
+      <returns>Generated string</returns>
+    </member>
+    <member name="M:Flux.SDK.StreamUtils.GetStringFromStream(System.IO.Stream,System.Int64)">
+      <summary>
+            Generates string from the specified stream
+            </summary>
+      <param name="stream">The stream to generate string from</param>
+      <param name="length">The stream length</param>
+      <returns>Generated string</returns>
+    </member>
+    <member name="T:Flux.Logger.ILogger">
+      <summary>Provides interfaces to work with Logger.</summary>
+    </member>
+    <member name="M:Flux.Logger.ILogger.Info(System.String)">
+      <summary>Logs specified message at the Info level.</summary>
+      <param name="message">Log message</param>
+    </member>
+    <member name="M:Flux.Logger.ILogger.Info(System.String,System.Object[])">
+      <summary>Writes the diagnostic message at the Info level using the specified parameters.</summary>
+      <param name="message">A string containing format items.</param>
+      <param name="args">Arguments to format.</param>
+    </member>
+    <member name="M:Flux.Logger.ILogger.Info``1(``0)">
+      <summary>Writes the diagnostic message at the Info level.</summary>
+      <typeparam name="T">Type of the value.</typeparam>
+      <param name="value">The value to be written.</param>
+    </member>
+    <member name="M:Flux.Logger.ILogger.Trace(System.String)">
+      <summary>Logs specified message at the Trace level.</summary>
+      <param name="message">Log message</param>
+    </member>
+    <member name="M:Flux.Logger.ILogger.Trace(System.String,System.Object[])">
+      <summary>Writes the diagnostic message at the Trace level using the specified parameters.</summary>
+      <param name="message">A string containing format items.</param>
+      <param name="args">Arguments to format.</param>
+    </member>
+    <member name="M:Flux.Logger.ILogger.Trace``1(``0)">
+      <summary>Writes the diagnostic message at the Trace level.</summary>
+      <typeparam name="T">Type of the value.</typeparam>
+      <param name="value">The value to be written.</param>
+    </member>
+    <member name="M:Flux.Logger.ILogger.Debug(System.String)">
+      <summary>Logs specified message at the Debug level.</summary>
+      <param name="message">Log message</param>
+    </member>
+    <member name="M:Flux.Logger.ILogger.Debug(System.String,System.Object[])">
+      <summary>Writes the diagnostic message at the Debug level using the specified parameters.</summary>
+      <param name="message">A string containing format items.</param>
+      <param name="args">Arguments to format.</param>
+    </member>
+    <member name="M:Flux.Logger.ILogger.Debug``1(``0)">
+      <summary>Writes the diagnostic message at the Debug level.</summary>
+      <typeparam name="T">Type of the value.</typeparam>
+      <param name="value">The value to be written.</param>
+    </member>
+    <member name="M:Flux.Logger.ILogger.Warn(System.String)">
+      <summary>Logs specified message at the Warn level.</summary>
+      <param name="message">Log message</param>
+    </member>
+    <member name="M:Flux.Logger.ILogger.Warn(System.String,System.Object[])">
+      <summary>Writes the diagnostic message at the Warn level using the specified parameters.</summary>
+      <param name="message">A string containing format items.</param>
+      <param name="args">Arguments to format.</param>
+    </member>
+    <member name="M:Flux.Logger.ILogger.Warn``1(``0)">
+      <summary>Writes the diagnostic message at the Warn level.</summary>
+      <typeparam name="T">Type of the value.</typeparam>
+      <param name="value">The value to be written.</param>
+    </member>
+    <member name="M:Flux.Logger.ILogger.Error(System.String)">
+      <summary>Logs specified message at the Error level.</summary>
+      <param name="message">Log message</param>
+    </member>
+    <member name="M:Flux.Logger.ILogger.Error(System.String,System.Object[])">
+      <summary>Writes the diagnostic message at the Error level using the specified parameters.</summary>
+      <param name="message">A string containing format items.</param>
+      <param name="args">Arguments to format.</param>
+    </member>
+    <member name="M:Flux.Logger.ILogger.Error``1(``0)">
+      <summary>Writes the diagnostic message at the Error level.</summary>
+      <typeparam name="T">Type of the value.</typeparam>
+      <param name="value">The value to be written.</param>
+    </member>
+    <member name="M:Flux.Logger.ILogger.Fatal(System.String)">
+      <summary>Logs specified message at the Fatal level.</summary>
+      <param name="message">Log message</param>
+    </member>
+    <member name="M:Flux.Logger.ILogger.Fatal(System.String,System.Object[])">
+      <summary>Writes the diagnostic message at the Fatal level using the specified parameters.</summary>
+      <param name="message">A string containing format items.</param>
+      <param name="args">Arguments to format.</param>
+    </member>
+    <member name="M:Flux.Logger.ILogger.Fatal``1(``0)">
+      <summary>Writes the diagnostic message at the Fatal level.</summary>
+      <typeparam name="T">Type of the value.</typeparam>
+      <param name="value">The value to be written.</param>
+    </member>
+    <member name="T:Flux.Logger.LogHelper">
+      <summary>Creates and manages instances of Logger objects.</summary>
+    </member>
+    <member name="M:Flux.Logger.LogHelper.GetLogger(System.String)">
+      <summary>Gets the specified named logger.</summary>
+      <param name="name">Name of the logger.</param>
+      <returns>Flux.Logger.IFluxLogger that contains logger reference. Multiple calls to GetLogger with the same argument aren't guaranteed to return the same logger reference.</returns>
+    </member>
+    <member name="T:Flux.Serialization.DataSerializer">
+      <summary>Contains methods for data serialization/deserialization.</summary>
+    </member>
+    <member name="M:Flux.Serialization.DataSerializer.Deserialize``1(System.String)">
+      <summary>Deserializes data using Newtonsoft.Json library to class T.</summary>
+      <typeparam name="T">Result data type.</typeparam>
+      <param name="data">Json string to deserialize.</param>
+      <returns>Deserialized object.</returns>
+    </member>
+    <member name="M:Flux.Serialization.DataSerializer.Deserialize``1(System.IO.Stream)">
+      <summary>Deserializes stream using Newtonsoft.Json library to class T.</summary>
+      <typeparam name="T">Result data type.</typeparam>
+      <param name="jsonStream">Json stream to deserialize.</param>
+      <returns>Deserialized object.</returns>
+    </member>
+    <member name="M:Flux.Serialization.DataSerializer.DynamicDeserialize(System.String)">
+      <summary>Deserializes data using Newtonsoft.Json library to dynamic object.</summary>
+      <param name="data">Json string to deserialize.</param>
+      <returns>Dynamic object represents Json.</returns>
+    </member>
+    <member name="M:Flux.Serialization.DataSerializer.DynamicDeserialize(System.IO.Stream)">
+      <summary> Deserializes stream using Newtonsoft.Json library to dynamic object.</summary>
+      <param name="jsonStream">Json string to deserialize.</param>
+      <returns>Dynamic object represents Json.</returns>
+    </member>
+    <member name="M:Flux.Serialization.DataSerializer.Serialize(System.Object)">
+      <summary>Serializes data using Newtonsoft.Json library.</summary>
+      <param name="data">Data to serialize.</param>
+      <returns>Json strings with serialized data.</returns>
+    </member>
+  </members>
+</doc>
