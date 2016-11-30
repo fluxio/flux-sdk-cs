@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D505C7D3-076E-4657-996C-79E21A55249F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Flux.Serialization</RootNamespace>
+    <AssemblyName>Flux.Serialization</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\Flux.Serialization.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\Flux.Serialization.XML</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\ThirdParty\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\Flux.SDK\Version.cs">
+      <Link>Version.cs</Link>
+    </Compile>
+    <Compile Include="ObjectToDictianaryConverter.cs" />
+    <Compile Include="DataSerializer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>REM Creating temp folder for merge
+if not exist "$(TargetDir)merged" mkdir "$(TargetDir)merged"
+REM Merging and signing libraries
+"$(SolutionDir)ThirdParty\ilmerge.exe" /t:lib /out:"$(TargetDir)merged\$(TargetName)$(TargetExt)" /targetplatform:"v4,C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0" /internalize:"$(ProjectDir)exclude.txt" "$(TargetPath)" "$(TargetDir)Newtonsoft.Json.dll"
+REM Copy output + pdb
+copy "$(TargetDir)merged\$(TargetName)$(TargetExt)" "$(TargetDir)$(TargetName)$(TargetExt)"
+copy "$(TargetDir)merged\$(TargetName).pdb" "$(TargetDir)$(TargetName).pdb"
+REM CleanUp
+RD /S /Q "$(TargetDir)merged"
+REM Copy to output
+if not exist "$(SolutionDir)bin\$(ConfigurationName)" mkdir "$(SolutionDir)bin\$(ConfigurationName)"
+copy "$(TargetPath)" "$(SolutionDir)bin\$(ConfigurationName)\$(TargetFileName)"
+copy "$(TargetDir)$(TargetName).XML" "$(SolutionDir)\bin\$(ConfigurationName)\$(TargetName).XML"</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

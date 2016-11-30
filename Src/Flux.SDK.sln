@@ -1,0 +1,50 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flux.SDK", "Flux.SDK\Flux.SDK.csproj", "{345649B5-AE74-4A52-A837-D03DE809893F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flux.Logger", "Flux.Logger\Flux.Logger.csproj", "{553E1F9B-71E2-4E1F-BD07-338EAB21D780}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flux.Serialization", "Flux.Serialization\Flux.Serialization.csproj", "{D505C7D3-076E-4657-996C-79E21A55249F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{345649B5-AE74-4A52-A837-D03DE809893F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{345649B5-AE74-4A52-A837-D03DE809893F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{345649B5-AE74-4A52-A837-D03DE809893F}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{345649B5-AE74-4A52-A837-D03DE809893F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{345649B5-AE74-4A52-A837-D03DE809893F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{345649B5-AE74-4A52-A837-D03DE809893F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{345649B5-AE74-4A52-A837-D03DE809893F}.Release|x64.ActiveCfg = Release|Any CPU
+		{345649B5-AE74-4A52-A837-D03DE809893F}.Release|x86.ActiveCfg = Release|Any CPU
+		{553E1F9B-71E2-4E1F-BD07-338EAB21D780}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{553E1F9B-71E2-4E1F-BD07-338EAB21D780}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{553E1F9B-71E2-4E1F-BD07-338EAB21D780}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{553E1F9B-71E2-4E1F-BD07-338EAB21D780}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{553E1F9B-71E2-4E1F-BD07-338EAB21D780}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{553E1F9B-71E2-4E1F-BD07-338EAB21D780}.Release|Any CPU.Build.0 = Release|Any CPU
+		{553E1F9B-71E2-4E1F-BD07-338EAB21D780}.Release|x64.ActiveCfg = Release|Any CPU
+		{553E1F9B-71E2-4E1F-BD07-338EAB21D780}.Release|x86.ActiveCfg = Release|Any CPU
+		{D505C7D3-076E-4657-996C-79E21A55249F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D505C7D3-076E-4657-996C-79E21A55249F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D505C7D3-076E-4657-996C-79E21A55249F}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{D505C7D3-076E-4657-996C-79E21A55249F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D505C7D3-076E-4657-996C-79E21A55249F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D505C7D3-076E-4657-996C-79E21A55249F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D505C7D3-076E-4657-996C-79E21A55249F}.Release|x64.ActiveCfg = Release|Any CPU
+		{D505C7D3-076E-4657-996C-79E21A55249F}.Release|x86.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
