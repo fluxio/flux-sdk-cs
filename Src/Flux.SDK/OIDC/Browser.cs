@@ -5,8 +5,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading;
+using SHDocVw;
 
-namespace Flux.SDK.OIC
+namespace Flux.SDK.OIDC
 {
     internal class Browser
     {
@@ -24,6 +25,11 @@ namespace Flux.SDK.OIC
         [DllImport("user32.dll")]
         private static extern bool BringWindowToTop(IntPtr hWnd);
 
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        private static extern IntPtr SendMessage(IntPtr hWnd, UInt32 Msg, IntPtr wParam, IntPtr lParam);
+
+        private const UInt32 WM_CLOSE = 0x0010;
+
         private const int width = 350;
         private const int height = 525;
         private const string loginHeader = "Log In";
@@ -33,17 +39,23 @@ namespace Flux.SDK.OIC
         private readonly BrowserType type;
         private string browserPath;
 
+        private IntPtr NewWindowHWND = IntPtr.Zero;
+
         public Browser()
         {
             type = GetSystemDefaultBrowser();
         }
 
-        internal void OpenLink(string url)
+        internal bool NewWindowWasOpened { get; private set; }
+
+        internal void OpenLinkInNewWindow(string url)
         {
             switch (type)
             {
                 case BrowserType.IExplore:
                     {
+                        NewWindowWasOpened = true;
+
                         var iExplorer = new SHDocVw.InternetExplorer
                         {
                             ToolBar = 0,
@@ -55,37 +67,77 @@ namespace Flux.SDK.OIC
                         };
 
                         iExplorer.Navigate(url);
-                        BringWindowToTop(new IntPtr(iExplorer.HWND));
+                        NewWindowHWND = new IntPtr(iExplorer.HWND);
+                        BringWindowToTop(NewWindowHWND);
                     }
                     break;
 
                 case BrowserType.Chrome:
-                    {
-                        StartBrowser(url);
-                    }
-                    break;
-
                 case BrowserType.Firefox:
                     {
-                        StartBrowser(url);
+                        NewWindowWasOpened = true;
+
+                        var args = string.Format(GetNewWindowOption(), url);
+                        StartBrowser(args);
                         ResizeWindow();
                     }
                     break;
 
                 default:
                     {
-                        Process.Start(url);
+                        var process = Process.Start(url);
+                        if (process != null)
+                            NewWindowHWND = process.MainWindowHandle;
                     }
                     break;
             }
         }
 
-        private void StartBrowser(string url)
+        internal void OpenLinkInNewTab(string url)
+        {
+            switch (type)
+            {
+                case BrowserType.IExplore:
+                    {
+                        bool found = false;
+                        ShellWindows iExplorerInstances = new ShellWindows();
+                        foreach (InternetExplorer iExplorer in iExplorerInstances)
+                        {
+                            if (iExplorer.Name == "Windows Internet Explorer")
+                            {
+                                iExplorer.Navigate(url, 0x800);
+                                found = true;
+                                break;
+                            }
+                        }
+
+                        if (!found)
+                            Process.Start(url);
+                    }
+                    break;
+
+                case BrowserType.Chrome:
+                case BrowserType.Firefox:
+                    {
+                        var args = string.Format(GetNewTabOption(), url);
+                        StartBrowser(args);
+                    }
+                    break;
+            }
+        }
+
+        internal void CloseLoginWindow()
+        {
+            if (NewWindowHWND != IntPtr.Zero)
+                SendMessage(NewWindowHWND, WM_CLOSE, IntPtr.Zero, IntPtr.Zero);
+        }
+
+        private void StartBrowser(string args)
         {
             var startInfo = new ProcessStartInfo
             {
                 FileName = browserPath,
-                Arguments = string.Format(GetNewWindowOption(), url)
+                Arguments = args
             };
 
             Process.Start(startInfo);
@@ -94,19 +146,20 @@ namespace Flux.SDK.OIC
         private void ResizeWindow()
         {
             bool endProcess = false;
-            
+
             // max wait is 5 sec. of process
             int maxCountCycle = 10;
-            
+
             for (int i = 0; i < maxCountCycle; i++)
             {
                 Process[] processes = Process.GetProcessesByName(type.ToString().ToLower());
-                
+
                 foreach (var process in processes.Where(p => p.MainWindowHandle != IntPtr.Zero))
                 {
-                    if ((process.MainWindowTitle.Contains(loginHeader) || process.MainWindowTitle.Contains(authorizeHeader)) 
+                    if ((process.MainWindowTitle.Contains(loginHeader) || process.MainWindowTitle.Contains(authorizeHeader))
                         && process.MainWindowTitle.Contains(fluxHeader))
                     {
+                        NewWindowHWND = process.MainWindowHandle;
                         ShowWindow(process.MainWindowHandle, 1); //SW_SHOWNORMAL
 
                         RECT rectangle;
@@ -130,11 +183,28 @@ namespace Flux.SDK.OIC
             switch (type)
             {
                 case BrowserType.Chrome:
-                    option = string.Format("--app=data:text/html,<html><body><script>window.moveTo(200,100);window.resizeTo({0},{1});window.location='{{0}}';</script></body></html>", width, height);
+                    option = "--app=data:text/html,<html><body><script>window.location='{0}';</script></body></html>";
                     break;
 
                 case BrowserType.Firefox:
                     option = "-new-window {0}";
+                    break;
+            }
+
+            return option;
+        }
+
+        private string GetNewTabOption()
+        {
+            string option = "{0}";
+            switch (type)
+            {
+                case BrowserType.Chrome:
+                    option = "-url {0}";
+                    break;
+
+                case BrowserType.Firefox:
+                    option = "-new-tab {0}";
                     break;
             }
 
@@ -168,7 +238,7 @@ namespace Flux.SDK.OIC
 
                         if (browserKey != null)
                         {
-                            var name = browserKey.GetValue(null).ToString().ToLower().Replace(((char) 34).ToString(), "");
+                            var name = browserKey.GetValue(null).ToString().ToLower().Replace(((char)34).ToString(), "");
                             if (!name.EndsWith("exe"))
                                 browserPath = name.Substring(0, name.LastIndexOf(".exe") + 4);
 
@@ -186,7 +256,7 @@ namespace Flux.SDK.OIC
                         {
                             if (bk != null)
                             {
-                                var name = bk.GetValue(null).ToString().ToLower().Replace(((char) 34).ToString(), "");
+                                var name = bk.GetValue(null).ToString().ToLower().Replace(((char)34).ToString(), "");
                                 if (!name.EndsWith("exe"))
                                     browserPath = name.Substring(0, name.LastIndexOf(".exe") + 4);
                             }

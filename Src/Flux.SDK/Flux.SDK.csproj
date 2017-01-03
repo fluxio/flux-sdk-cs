@@ -71,9 +71,9 @@
     <Compile Include="DataTable\DatatableTypes\ProgressStream.cs" />
     <Compile Include="DataTable\DatatableEventArgs.cs" />
     <Compile Include="Utils\DeserializationBinder.cs" />
-    <Compile Include="OIC\Browser.cs" />
-    <Compile Include="OIC\CodeFlowOIC.cs" />
-    <Compile Include="OIC\Token.cs" />
+    <Compile Include="OIDC\Browser.cs" />
+    <Compile Include="OIDC\CodeFlowOIDC.cs" />
+    <Compile Include="OIDC\Token.cs" />
     <Compile Include="SDKMetadata.cs" />
     <Compile Include="Types\SupportedVersions.cs" />
     <Compile Include="WebServices\HttpWebClientHelper.cs" />

@@ -3,18 +3,19 @@ using System.Net;
 using System.Text;
 using Flux.Logger;
 
-namespace Flux.SDK.OIC
+namespace Flux.SDK.OIDC
 {
-    internal class CodeFlowOIC
+    internal class CodeFlowOIDC
     {
         private static readonly ILogger log = LogHelper.GetLogger("SDK.OIC");
 
         private Token token;
+        private Browser defaultBrowser;
         private string pluginInfoUrl;
 
-        public Action OnOICCallbackReceived;
+        public Action OnOIDCCallbackReceived;
 
-        public CodeFlowOIC(string pluginInfoUrl)
+        public CodeFlowOIDC(string pluginInfoUrl)
         {
             this.pluginInfoUrl = pluginInfoUrl;
         }
@@ -26,8 +27,8 @@ namespace Flux.SDK.OIC
                 token = new Token(clientSecret, sdkMetadata);
 
                 //get default browser
-                var browser = new Browser();
-                browser.OpenLink(token.GetAuthorizationUrl());
+                defaultBrowser = new Browser();
+                defaultBrowser.OpenLinkInNewWindow(token.GetAuthorizationUrl());
 
                 //init http listener
                 var listener = new HttpListener();
@@ -55,27 +56,38 @@ namespace Flux.SDK.OIC
                 HttpListenerRequest request = context.Request;
                 var url = request.Url;
 
-                //navigate to plugin info url
-                string redirectHtml = "<!DOCTYPE html> <html lang=\"en\" xmlns=\"http://www.w3.org/1999/xhtml\">" +
-                                      "<head> <meta charset=\"utf-8\" /> <title></title> <script type=\"text/javascript\">" +
-                                      "function getUrl() { window.location.href = '" + pluginInfoUrl +
-                                      "'; } window.onload = getUrl; </script>" +
-                                      "</head><body></body></html>";
+                if (defaultBrowser.NewWindowWasOpened)
+                {
+                    //stop listening to redirect uri port
+                    listener.Stop();
 
-                var response = context.Response;
-                byte[] bytes = Encoding.ASCII.GetBytes(redirectHtml);
-                response.OutputStream.Write(bytes, 0, bytes.Length);
-                response.OutputStream.Close();
+                    defaultBrowser.CloseLoginWindow();
+                    defaultBrowser.OpenLinkInNewTab(pluginInfoUrl);
+                }
+                else
+                {
+                    //navigate to plugin info url
+                    string redirectHtml = "<!DOCTYPE html> <html lang=\"en\" xmlns=\"http://www.w3.org/1999/xhtml\">" +
+                                          "<head> <meta charset=\"utf-8\" />  <title></title> <script type=\"text/javascript\">" +
+                                          "function getUrl() { window.location.href = '" + pluginInfoUrl +
+                                          "'; } window.onload = getUrl; </script>" +
+                                          "</head><body></body></html>";
+
+                    var response = context.Response;
+                    byte[] bytes = Encoding.ASCII.GetBytes(redirectHtml);
+                    response.OutputStream.Write(bytes, 0, bytes.Length);
+                    response.OutputStream.Close();
+
+                    //stop listening to redirect uri port
+                    listener.Stop();
+                }
 
                 //get token from response
                 token.ObtainToken(url);
 
-                //stop listening to redirect uri port
-                listener.Stop();
-
-                //notify that OIC was finished
-                if (OnOICCallbackReceived != null)
-                    OnOICCallbackReceived();
+                //notify that OIDC was finished
+                if (OnOIDCCallbackReceived != null)
+                    OnOIDCCallbackReceived();
             }
             catch (Exceptions.FluxException)
             {

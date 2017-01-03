@@ -117,7 +117,7 @@ namespace Flux.SDK
         /// <summary>Log in user using OIDC code flow.</summary>
         /// <param name="clientSecret">ClientSecret to be used to request a token.</param>
         /// <param name="pluginInfoUrl">Info url to navigate to after login.</param>
-        /// <exception cref="Exceptions.AuthorizationFailedException">Throws if OIC authorization process failed.</exception>
+        /// <exception cref="Exceptions.AuthorizationFailedException">Throws if OIDC authorization process failed.</exception>
         /// <exception cref="Exceptions.ConnectionFailureException">Throws if network connection is down.</exception>
         /// <exception cref="Exceptions.ServerUnavailableException">Throws if Flux server is down.</exception>
         /// <exception cref="Exceptions.InternalSDKException">Throws for unhandled SDK exceptions.</exception>
@@ -132,8 +132,8 @@ namespace Flux.SDK
                 return;
             }
 
-            var oic = new OIC.CodeFlowOIC(pluginInfoUrl);
-            oic.OnOICCallbackReceived += OnOICCallbackReceived;
+            var oic = new OIDC.CodeFlowOIDC(pluginInfoUrl);
+            oic.OnOIDCCallbackReceived += OnOICCallbackReceived;
             oic.LoginViaOIC(clientSecret, sdkMetadata);
         }
 

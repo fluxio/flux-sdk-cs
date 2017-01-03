@@ -14,12 +14,12 @@ using Flux.SDK.Properties;
 using Flux.Serialization;
 using System.Runtime.Serialization;
 
-namespace Flux.SDK.OIC
+namespace Flux.SDK.OIDC
 {
     [DataContract]
     internal class Token
     {
-        private static readonly ILogger log = LogHelper.GetLogger("SDK.OIC|Token");
+        private static readonly ILogger log = LogHelper.GetLogger("SDK.OIDC|Token");
 
         private readonly string clientSecret;
         private readonly SDKMetadata sdkMetadata;
@@ -81,13 +81,16 @@ namespace Flux.SDK.OIC
 
         internal void ObtainToken(Uri uri)
         {
-            var code = HttpUtility.ParseQueryString(uri.Query).Get("code");
-            var fluxToken = HttpUtility.ParseQueryString(uri.Query).Get("flux_token");
-            var returnedStateId = HttpUtility.ParseQueryString(uri.Query).Get("state");
-
-            //we MUST verify state
-            if (!string.IsNullOrEmpty(returnedStateId) && returnedStateId.ToLower() == stateId.ToString().ToLower())
+            try
             {
+                var code = HttpUtility.ParseQueryString(uri.Query).Get("code");
+                var fluxToken = HttpUtility.ParseQueryString(uri.Query).Get("flux_token");
+                var returnedStateId = HttpUtility.ParseQueryString(uri.Query).Get("state");
+
+                //we MUST verify state
+                if (string.IsNullOrEmpty(returnedStateId) || returnedStateId != stateId.ToString())
+                    throw new Exceptions.AuthorizationFailedException("State uuids don't match.");
+
                 //requesting access_token 
                 var request = HttpWebClientHelper.CreateRequest(sdkMetadata, FluxApiData.TokenUrl, null);
                 request.Method = "POST";
@@ -108,63 +111,60 @@ namespace Flux.SDK.OIC
                     stream.Write(bytes, 0, bytes.Length);
                 }
 
-                try
+                using (var response = HttpWebClientHelper.GetResponse(request))
                 {
-                    using (var response = HttpWebClientHelper.GetResponse(request))
+                    var token = DataSerializer.Deserialize<Token>(StreamUtils.GetDecompressedResponseStream(response));
+
+                    if (token != null && !string.IsNullOrEmpty(token.AccessToken) && !string.IsNullOrEmpty(fluxToken) && !string.IsNullOrEmpty(token.IdToken))
                     {
-                        var token = DataSerializer.Deserialize<Token>(StreamUtils.GetDecompressedResponseStream(response));
+                        //verify nonce uuid
+                        JwtSecurityToken jwtSecurityToken = new JwtSecurityToken(token.IdToken);
+                        var returnedNonceId = jwtSecurityToken.Payload.Nonce;
+                        if (string.IsNullOrEmpty(returnedNonceId) || returnedNonceId != nonceId.ToString())
+                            throw new Exceptions.AuthorizationFailedException("Nonce uuids don't match.");
 
-                        if (token != null && !string.IsNullOrEmpty(token.AccessToken) && !string.IsNullOrEmpty(fluxToken) && !string.IsNullOrEmpty(token.IdToken))
+                        token.FluxToken = fluxToken;
+                        Init(token);
+
+                        var path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"Flux\fluxData.bin");
+                        if (!string.IsNullOrEmpty(AccessToken) && !string.IsNullOrEmpty(FluxToken))
                         {
-                            //verify nonce uuid
-                            JwtSecurityToken jwtSecurityToken = new JwtSecurityToken(token.IdToken);
-                            var returnedNonceId = jwtSecurityToken.Payload.Nonce;
-                            if (string.IsNullOrEmpty(returnedNonceId) || nonceId.ToString().ToLower() != returnedNonceId.ToLower())
-                                throw new Exceptions.AuthorizationFailedException("Nonce uuids don't match.");
-
-                            token.FluxToken = fluxToken;
-                            Init(token);
-
-                            var path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), @"Flux\fluxData.bin");
-                            if (!string.IsNullOrEmpty(AccessToken) && !string.IsNullOrEmpty(FluxToken))
+                            var cookies = new List<FluxCookie>();
+                            var authCook = new FluxCookie()
                             {
-                                var cookies = new List<FluxCookie>();
-                                var authCook = new FluxCookie()
-                                {
-                                    CookieName = "auth",
-                                    CookieValue = Uri.UnescapeDataString(AccessToken),
-                                    CookieDomain = sdkMetadata.BaseUri.Host
-                                };
-                                cookies.Add(authCook);
+                                CookieName = "auth",
+                                CookieValue = Uri.UnescapeDataString(AccessToken),
+                                CookieDomain = sdkMetadata.BaseUri.Host
+                            };
+                            cookies.Add(authCook);
 
-                                var fluxCook = new FluxCookie()
-                                {
-                                    CookieName = "flux_token",
-                                    CookieValue = Uri.UnescapeDataString(FluxToken),
-                                    CookieDomain = sdkMetadata.BaseUri.Host
-                                };
-                                cookies.Add(fluxCook);
+                            var fluxCook = new FluxCookie()
+                            {
+                                CookieName = "flux_token",
+                                CookieValue = Uri.UnescapeDataString(FluxToken),
+                                CookieDomain = sdkMetadata.BaseUri.Host
+                            };
+                            cookies.Add(fluxCook);
 
-                                Utils.StoreOICCookies(path, cookies, sdkMetadata.ClientInfo.ClientId);
-                            }
-                        }
-                        else
-                        {
-                            log.Debug("Unable to receive token.");
-                            throw new Exceptions.AuthorizationFailedException(
-                                "Authentification has been failed. See log for more details.");
+                            Utils.StoreOICCookies(path, cookies, sdkMetadata.ClientInfo.ClientId);
                         }
                     }
+                    else
+                    {
+                        log.Debug("Unable to receive token.");
+                        throw new Exceptions.AuthorizationFailedException(
+                            "Authentification has been failed. See log for more details.");
+                    }
                 }
-                catch (Exceptions.AuthorizationFailedException)
-                {
-                    throw;
-                }
-                catch (Exception ex)
-                {
-                    log.Error(ex);
-                    throw new Exceptions.AuthorizationFailedException(ex.Message);
-                }
+            }
+            catch (Exceptions.AuthorizationFailedException)
+            {
+                throw;
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex);
+                throw new Exceptions.AuthorizationFailedException(ex.Message);
             }
         }
 
@@ -181,7 +181,7 @@ namespace Flux.SDK.OIC
                 if (endpoints.All(el => el.Port != port))
                     return port;
             }
-			
+
             //In any case, let's try to use port 3000
             return startPortNumber;
         }
