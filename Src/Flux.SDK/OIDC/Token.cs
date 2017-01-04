@@ -153,7 +153,7 @@ namespace Flux.SDK.OIDC
                     {
                         log.Debug("Unable to receive token.");
                         throw new Exceptions.AuthorizationFailedException(
-                            "Authentification has been failed. See log for more details.");
+                            "Authentication has been failed. See log for more details.");
                     }
                 }
             }

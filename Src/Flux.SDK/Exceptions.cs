@@ -122,7 +122,7 @@ namespace Flux.SDK
         public class UnathorizedException : NetworkException
         {
             internal UnathorizedException()
-                : base("Authentification is required to get access to the resource. Please log in (relogin) to get access.", 401)
+                : base("Authentication is required to get access to the resource. Please log in (relogin) to get access.", 401)
             {
             }
 
